@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ycw.system.dao.TypeDao">
+	<select id="getType" resultType="ycw.system.pojo.base.TSType" parameterType="map">
+		SELECT 
+			type.ID as id, type.typename as typename, type.typecode, typeg.typegroupcode
+		FROM
+			t_s_type as type
+		LEFT JOIN t_s_typegroup AS typeg ON type.typegroupid = typeg.ID
+		WHERE
+			typeg.typegroupcode = #{typegroupcode}
+	</select>
+</mapper>

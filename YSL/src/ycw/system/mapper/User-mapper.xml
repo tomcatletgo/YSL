@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ycw.system.dao.UserDao">
+	
+	<!--查询用户信息 -->
+	<select id="getUser" resultType="ycw.system.pojo.base.TSUser" parameterType="map">
+		SELECT
+			baseUser.ID as id,users.username as userName,depart.departname as driverLicense,baseUser.realname as realname,users.status as status
+		FROM
+			t_s_user AS users
+		LEFT JOIN t_s_base_user AS baseUser ON users.id= baseUser.ID
+		LEFT JOIN t_s_depart AS depart ON baseUser.departid = depart.ID
+		WHERE
+			users.isdelete = '0'
+<!-- 			<if test="departId != '' and departId != null"> -->
+<!-- 				AND baseUser.departid = #{departId} -->
+<!-- 			</if> -->
+			<if test="userName != '' and userName != null">
+				AND users.username LIKE CONCAT('%', #{userName}, '%')
+			</if>
+			<if test="realName != '' and realName != null">
+				AND baseUser.realname LIKE CONCAT('%', #{realName}, '%')
+			</if>
+			<if test = "departId != '' and departId != null">
+				AND baseUser.departid in
+			<foreach item="item" index="index" collection="departId" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+			</if>
+			
+			limit #{begin}, #{end}
+	</select>
+	
+	<!--查询用户信息总数 -->
+	<select id="getUserTotle" resultType="int" parameterType="map">
+		SELECT
+			count(users.id)
+		FROM
+			t_s_user AS users
+		LEFT JOIN t_s_base_user AS baseUser ON users.id= baseUser.ID
+		LEFT JOIN t_s_depart AS depart ON baseUser.departid = depart.ID
+		WHERE
+			users.isdelete = '0'
+<!-- 			<if test="departId != '' and departId != null"> -->
+<!-- 				AND baseUser.departid = #{departId} -->
+<!-- 			</if> -->
+			<if test="userName != '' and userName != null">
+				AND users.username LIKE CONCAT('%', #{userName}, '%')
+			</if>
+			<if test="realName != '' and realName != null">
+				AND baseUser.realname LIKE CONCAT('%', #{realName}, '%')
+			</if>
+			<if test = "departId != '' and departId != null">
+				AND baseUser.departid in
+			<foreach item="item" index="index" collection="departId" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+			</if>
+	</select>
+	
+	
+	<select id="getUser4Businesses" resultType="ycw.ns.entity.TSUserEntity" parameterType="map">
+		SELECT
+			baseUser.ID as id,
+			u.username as userName,
+			bi.businesses_name as driverLicense,
+			bi.businesses_type businessesType,
+			baseUser.realname as realname,
+			u.status as status,
+			bi.businesses_verify_status as businessesVerifyStatus
+		FROM t_s_user u LEFT JOIN t_s_base_user AS baseUser ON u.id= baseUser.ID
+		LEFT JOIN t_s_depart AS depart ON baseUser.departid = depart.ID, ns_businesses_info bi
+		where u.businessesRowId = bi.row_id
+		and bi.del_flag = 'n'
+		and u.isdelete='0'
+		<if test="businessesName != '' and businessesName != null">
+				AND bi.businesses_name LIKE CONCAT('%', #{businessesName}, '%')
+		</if>
+		<if test="userName != '' and userName != null">
+				AND u.username LIKE CONCAT('%',  #{userName}, '%')
+		</if>
+		<if test="isUserName4Check != '' and isUserName4Check != null">
+				AND u.username = #{isUserName4Check}
+		</if>
+		limit #{begin}, #{end}
+	</select>
+	<select id="getUserTotal4Businesses" resultType="int" parameterType="map">
+		SELECT
+			count(1)
+		FROM t_s_user u LEFT JOIN t_s_base_user AS baseUser ON u.id= baseUser.ID
+		LEFT JOIN t_s_depart AS depart ON baseUser.departid = depart.ID, ns_businesses_info bi
+		where u.businessesRowId = bi.row_id
+		and bi.del_flag = 'n'
+		and u.isdelete='0'
+		<if test="businessesName != '' and businessesName != null">
+				AND bi.businesses_name LIKE CONCAT('%', #{businessesName}, '%')
+		</if>
+		<if test="username != '' and username != null">
+				AND u.username LIKE CONCAT('%', #{username}, '%')
+		</if>
+		 
+	</select>
+	<!-- 删除用户关系表 -->
+	<delete id="deleteRoleUser" parameterType="ycw.system.pojo.base.TSRoleUser">
+		DELETE FROM 
+			t_s_role_user 
+		WHERE 
+			userid = #{TSUserID} 
+	</delete>
+	<!--删除用户 -->
+	<update id="updateUser"  parameterType="ycw.system.pojo.base.TSUser" > 
+		UPDATE  t_s_user SET
+			isdelete = #{isdelete}
+		where ID = #{id}
+	</update>
+	
+	<!--启用用户 -->
+	<update id="updateUserStatus"  parameterType="ycw.system.pojo.base.TSUser" > 
+		UPDATE  t_s_user SET
+			status = #{status}
+		where ID = #{id}
+	</update>
+	
+	<!--修改用户密码 -->
+	<update id="updateUserPassword"  parameterType="ycw.system.pojo.base.TSUser" > 
+		UPDATE  t_s_user SET
+			password = #{password}
+		where ID = #{id}
+	</update>
+	
+	<!--向baseUser添加 -->
+	<insert id="addBaseUserInf" parameterType="ycw.system.pojo.base.TSBaseUser">
+		insert into t_s_base_user (ID,realName,departid) values
+		(#{id},#{realName},#{depart});
+	</insert>
+	
+	<!--向user添加 -->
+	<insert id="addUserInf" parameterType="ycw.system.pojo.base.TSUser">
+		insert into t_s_user (ID,username, password,status,isdelete,businessesRowId) values
+		(#{id},#{userName},#{password},#{status},#{isdelete},#{businessesRowId});
+	</insert>
+	
+	<!--向RoleUser添加 -->
+	<insert id="addRoleUserInf" parameterType="ycw.system.pojo.base.TSRoleUser">
+		insert into t_s_role_user 
+			(ID, userid, roleid )
+		values
+			(#{id},#{TSUserID},#{TSRoleID});
+	</insert>
+	
+	<!--修改用户信息 -->
+	<update id="updateBaseuser"  parameterType="ycw.system.pojo.base.TSBaseUser" > 
+		UPDATE  t_s_base_user SET
+			realName = #{realName},
+			departid = #{depart}
+		where ID = #{id}
+	</update>
+	
+	<select id="getUserById" resultType="ycw.system.vo.UserVo" parameterType="String">
+		SELECT
+			baseUser.ID as id,users.username as userName,depart.departname as driverLicense,baseUser.realname as realname,baseUser.departid as depart
+		FROM
+			t_s_user AS users
+		LEFT JOIN t_s_base_user AS baseUser ON users.id= baseUser.ID
+		LEFT JOIN t_s_depart AS depart ON baseUser.departid = depart.ID
+		WHERE
+			users.isdelete = '0' AND users.id = #{id}
+	</select>
+	<select id="getrolesUserList" resultType="String" parameterType="String">
+		SELECT
+			ro.rolename
+		FROM
+			t_s_role AS ro
+		LEFT JOIN t_s_role_user AS rou ON rou.roleid = ro.ID
+		WHERE
+			rou.userid = #{id}
+	</select>
+	
+	<!-- ajax判断用户登录 -->
+	<select id="messageLogin" resultType="String" parameterType="String">
+		SELECT
+			users.id
+		FROM
+			t_s_user AS users
+		LEFT JOIN t_s_base_user AS baseUser ON users.id= baseUser.ID
+		LEFT JOIN t_s_depart AS depart ON baseUser.departid = depart.ID
+		WHERE users.isdelete = '0'
+		<if test="username != '' and username != null">
+			AND users.username = #{username}
+		</if>
+		<if test="password != '' and password != null">
+			AND users.password = #{password}
+		</if>
+	</select>
+</mapper>

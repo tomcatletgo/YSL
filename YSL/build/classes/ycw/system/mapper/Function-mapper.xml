@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ycw.system.dao.FunctionDao">
+	
+	<!-- 查询所有集合  -->
+	<select id="getFunctionList" resultType="ycw.system.vo.FunctionVo" parameterType="map">
+		select
+        fun.ID,
+        fun.parentfunctionid parentId,
+        fun.iconid as iconPath,
+        fun.functioniframe as functionIframe,
+        fun.functionlevel as functionLevel,
+        fun.functionname as functionName,
+        fun.functionorder as functionOrder,
+        fun.functionurl as functionUrl 
+    from
+        t_s_function fun 
+    where
+        1 = 1
+		<if test="parentfunctionid != '' and parentfunctionid != null">
+			AND fun.parentfunctionid = #{parentfunctionid}
+		</if>
+		
+		<if test="parentfunctionid == '' or parentfunctionid == null">
+			AND fun.parentfunctionid is null 
+		</if>
+		
+		<if test="selfId != '' and selfId != null">
+			AND fun.ID != #{selfId} 
+		</if>
+    order by
+        fun.functionorder asc
+	</select>
+	<!-- 子菜单 -->
+	<select id="getChildList" parameterType="string" resultType="int">
+		select count(ID)
+		  from t_s_function
+		 where parentfunctionid = #{parentId}
+	</select>
+	
+	<!-- 根据id找到图标路径 -->
+	<select id="getIconPath" parameterType="string" resultType="String">
+		select path
+		  from t_s_icon
+		 where id = #{id}
+	</select>
+	
+	<!-- 查询TSFunction集合 -->
+	<select id="getAllList" resultType="ycw.system.pojo.base.TSFunction">
+		select *
+		  from t_s_function
+	</select>
+	
+	<!-- 查询TSIcon集合 -->
+	<select id="getIconList"  resultType="ycw.system.pojo.base.TSIcon">
+		select id,
+				extend,
+				iconclas,
+				content as iconContent,
+				name as iconName,
+				path as icon,
+				type as iconType
+		  from t_s_icon
+	</select>
+	
+	<!-- 根据id找表t_s_function数据-->
+	<select id="getById" parameterType="string" resultType="ycw.system.vo.FunctionVo">
+		select 
+			fun.ID,
+	        fun.parentfunctionid parentId,
+	        fun.iconid as iconPath,
+	        fun.functioniframe as functionIframe,
+	        fun.functionlevel as functionLevel,
+	        fun.functionname as functionName,
+	        fun.functionorder as functionOrder,
+	        fun.functionurl as functionUrl 
+		  from t_s_function fun
+		 where fun.id = #{id}
+	</select>
+	
+	<!-- id查询主菜单 -->
+	<select id="getParentFunction" parameterType="string" resultType="ycw.system.pojo.base.TSFunction">
+		select *
+		  from t_s_function
+		 where id = #{parentId}
+	</select>
+	
+	<!-- 菜单的录入 -->
+	<insert id="saveFunction" parameterType="ycw.system.pojo.base.TSFunction">
+		insert 
+		    into
+		        t_s_function
+		        (parentfunctionid, iconid, functioniframe, functionlevel, functionname, 
+		
+		functionorder, functionurl, ID) 
+		    values
+		        (#{TSFunction.id}, 
+				#{TSIcon.id},
+				#{functionIframe},
+				#{functionLevel},
+				#{functionName},
+				#{functionOrder},
+				#{functionUrl},
+				#{id})
+	</insert>
+	<!-- 菜单的更新 -->
+	<update id="updateFunction">
+		update
+	        t_s_function 
+	    set
+	        parentfunctionid=#{TSFunction.id},
+	        iconid=#{TSIcon.id},
+	        functioniframe=#{functionIframe},
+	        functionlevel=#{functionLevel},
+	        functionname=#{functionName},
+	        functionorder=#{functionOrder},
+	        functionurl=#{functionUrl}
+	    where
+	        ID=#{id}
+	</update>
+	
+	<!-- 查询图标 -->
+	<select id="getIconById" parameterType="string" resultType="ycw.system.pojo.base.TSIcon">
+		select *
+		  from t_s_icon
+		 where id = #{id}
+	</select>
+	<!-- 删除子菜单 -->
+	<delete id="deleteChildFunction">
+		delete from t_s_role_function where functionid=#{id}
+		
+	</delete>
+	
+	<!-- 删除主菜单 -->
+	<delete id="deleteFunction">
+		delete from t_s_function where id=#{id}
+	</delete>
+	
+</mapper>

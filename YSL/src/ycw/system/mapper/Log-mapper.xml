@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ycw.system.dao.LogDao">
+	
+	<!-- 获取所有集合 -->
+	<select id="getLogList" resultType="ycw.system.vo.LogVo" parameterType="map">
+		SELECT 
+			log.loglevel as loglevel, 
+			log.logcontent as logcontent,
+			log.accessType as accessType,
+			log.note as note,
+			log.broswer as broswer,
+			user.username as realName,
+			log.operatetime as operatetime
+		  from t_s_log log, t_s_user user
+		  where log.userid = user.id 
+			<if test = "beginupdtime != '' and beginupdtime != null">
+				AND log.operatetime &gt;= #{beginupdtime}
+			</if>
+			<if test = "endupdtime != '' and endupdtime != null">
+				AND log.operatetime &lt;= #{endupdtime}
+			</if>
+ 			<if test = "accessType != '' and accessType != null"> 
+ 				AND log.accessType = #{accessType} 
+ 			</if>
+ 			<if test = "loglevel != '' and loglevel != null"> 
+				AND log.loglevel = #{loglevel}
+			</if>
+			ORDER BY log.operatetime DESC
+			limit #{begin}, #{end}
+	</select>
+	
+	<!-- 查询所有数据总数 -->
+	<select id="getLogCount" resultType="int">
+		select count(log.ID)
+		  from t_s_log log
+		  where 1 = 1
+		  <if test = "beginupdtime != '' and beginupdtime != null">
+				AND log.operatetime &gt;= #{beginupdtime}
+			</if>
+			<if test = "endupdtime != '' and endupdtime != null">
+				AND log.operatetime &lt;= #{endupdtime}
+			</if>
+ 			<if test = "accessType != '' and accessType != null"> 
+ 				AND log.accessType = #{accessType} 
+ 			</if>
+ 			<if test = "loglevel != '' and loglevel != null"> 
+				AND log.loglevel = #{loglevel}
+			</if>
+	</select>
+	
+	<!-- 添加日志 -->
+	<insert id="addLog" parameterType="ycw.system.pojo.base.TSLog">
+		
+		insert 
+		    into
+		        t_s_log
+		        (userid, accessType, broswer, logcontent, loglevel, note, operatetime, operatetype, 
+		
+		ID) 
+		    values
+		        (
+		        #{TSUser.id},
+		        #{accessType},
+		        #{broswer},
+		        #{logcontent},
+		        #{loglevel},
+		        #{note},
+		        #{operatetime},
+		        #{operatetype},
+		        #{id}
+		        )
+	</insert>
+	
+</mapper>
