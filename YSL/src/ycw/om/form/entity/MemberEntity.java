@@ -1,12 +1,29 @@
 package ycw.om.form.entity;
 
-public class MemberlistEntity extends BaseEntity {
+public class MemberEntity extends BaseEntity {
    private String memberId;
    private String userId;
    private String memberTime;
    private String memberName;
    private String memberPoints;
    private String memberRegistrationDate;
+   
+   private MemberAuthenticationEntity memberAuthenticationEntity;
+   private MemberPointsLevelEntity memberPointsLevelEntity;
+   
+   
+public MemberAuthenticationEntity getMemberAuthenticationEntity() {
+	return memberAuthenticationEntity;
+}
+public void setMemberAuthenticationEntity(MemberAuthenticationEntity memberAuthenticationEntity) {
+	this.memberAuthenticationEntity = memberAuthenticationEntity;
+}
+public MemberPointsLevelEntity getMemberPointsLevelEntity() {
+	return memberPointsLevelEntity;
+}
+public void setMemberPointsLevelEntity(MemberPointsLevelEntity memberPointsLevelEntity) {
+	this.memberPointsLevelEntity = memberPointsLevelEntity;
+}
 public String getMemberId() {
 	return memberId;
 }

@@ -11,20 +11,20 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 import core.common.service.impl.CommonServiceImpl;
-import ycw.om.form.dao.MemberlistDao;
-import ycw.om.form.service.MemberlistService;
+import ycw.om.form.dao.MemberDao;
+import ycw.om.form.service.MemberService;
 
-public class MemberlistServiceImpl extends CommonServiceImpl implements MemberlistService {
+public class MemberServiceImpl extends CommonServiceImpl implements MemberService {
 	private String urlFormat = "http://%s.%s/%s";
 
-	MemberlistDao memberlistDao;
+	MemberDao memberlistDao;
 	
 
-	public MemberlistDao getMemberlistDao() {
+	public MemberDao getMemberlistDao() {
 		return memberlistDao;
 	}
 	@Resource
-    public void setMemberlistDao(MemberlistDao memberlistDao) {
+    public void setMemberlistDao(MemberDao memberlistDao) {
 		this.memberlistDao = memberlistDao;
 	}
 

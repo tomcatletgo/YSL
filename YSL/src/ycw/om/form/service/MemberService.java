@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-public interface MemberlistService {
+public interface MemberService {
 	public <T> List<T> findMemberList(Map<String,Object> pMap) throws RuntimeException;
 	
 	public int findMemberListTotal(Map<String,Object> pMap) throws RuntimeException;
