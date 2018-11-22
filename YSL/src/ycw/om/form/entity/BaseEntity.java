@@ -4,11 +4,12 @@ public class BaseEntity {
 	private String rowId;
 	private String delFlag;
 	private String createTime;
-	private String createUser;
+	private String createUserId;
+	
 	private String updateTime;
-	private String updateUser;
+	private String updateUserId;
 	private String delTime;
-	private String delUser;
+	private String delUserId;
 	
 	
 	public String getRowId() {
@@ -29,34 +30,37 @@ public class BaseEntity {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public String getCreateUser() {
-		return createUser;
-	}
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
+
 	public String getUpdateTime() {
 		return updateTime;
 	}
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
-	public String getUpdateUser() {
-		return updateUser;
-	}
-	public void setUpdateUser(String updateUser) {
-		this.updateUser = updateUser;
-	}
+
 	public String getDelTime() {
 		return delTime;
 	}
 	public void setDelTime(String delTime) {
 		this.delTime = delTime;
 	}
-	public String getDelUser() {
-		return delUser;
+
+	public String getDelUserId() {
+		return delUserId;
 	}
-	public void setDelUser(String delUser) {
-		this.delUser = delUser;
+	public void setDelUserId(String delUserId) {
+		this.delUserId = delUserId;
+	}
+	public String getCreateUserId() {
+		return createUserId;
+	}
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
+	}
+	public String getUpdateUserId() {
+		return updateUserId;
+	}
+	public void setUpdateUserId(String updateUserId) {
+		this.updateUserId = updateUserId;
 	}
 }

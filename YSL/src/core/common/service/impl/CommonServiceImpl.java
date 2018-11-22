@@ -463,9 +463,9 @@ public class CommonServiceImpl implements CommonService {
 	}
 	
 	
-	public String getParamaterMapValue(String key,Map<String,String[]> pMap) {
+	public String getParamaterMapValue(String key,Map<String, Object> pMap) {
 		 
-		String[] valueArray = pMap.get(key);
+		String[] valueArray = (String[]) pMap.get(key);
 		if(NSCommonUtils.isArrayEmpty(valueArray)) {
 			return null;
 		}

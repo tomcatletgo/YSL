@@ -1,6 +1,6 @@
 package ycw.om.form.entity;
 
-public class MemberlistEntity extends BaseEntity {
+public class MemberEntity extends BaseEntity {
    private String memberId;
    private String userId;
    private String memberTime;
