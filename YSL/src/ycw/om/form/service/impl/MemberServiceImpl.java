@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import core.common.service.impl.CommonServiceImpl;
 import ycw.om.form.dao.MemberDao;
+
 import ycw.om.form.entity.MemberEntity;
 import ycw.om.form.service.MemberService;
 
@@ -74,6 +75,7 @@ public class MemberServiceImpl extends CommonServiceImpl implements MemberServic
 		
 		
 		
+
 		return 0;
 	}
 
