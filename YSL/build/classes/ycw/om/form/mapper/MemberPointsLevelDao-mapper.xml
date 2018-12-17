@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ycw.om.form.dao.MemberPointsLevelDao">
+
+<resultMap type="ycw.om.form.entity.MemberPointsLevelEntity" id="levelListBase">
+	<id column="member_level_id" property="rowId" />
+	<result column="member_level_name" property="memberLevelName"/>
+	<result column="member_points_bottom" property="memberPointsBottom"/>
+	<result column="member_points_top" property="memberPointsTop"/>
+	<result column="member_discount" property="memberDiscount"/>
+	<result column="is_special" property="isSpecial"/>
+	<result column="is_show_price" property="isShowPrice"/>
+</resultMap>
+
+<select id="getLevelList"  resultMap="levelListBase" parameterType="map" >
+
+    select * 
+    from member_points_level
+    <where>
+    	
+    	<if test="#{maxPoint} != null and #{maxPoint} != ''">
+    		and member_points_top  &lt;= #{maxPoint}
+    	</if>
+    	<if test="#{minPoint} != null and #{minPoint} != ''">
+    		and member_points_bottom >= #{minPoint}
+    	</if>
+    	
+    </where> 
+    order by member_points_bottom
+
+</select>
+
+
+
+</mapper>

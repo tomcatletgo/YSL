@@ -7,7 +7,7 @@ package ycw.om.form.entity;
  *
  * @Description 会员等级
  */
-public class MemberPointsLevelEntity {
+public class MemberPointsLevelEntity extends BaseEntity{
 
 	private String memberLevelName;
 	private String memberPointsBottom;

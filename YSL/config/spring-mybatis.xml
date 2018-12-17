@@ -17,18 +17,15 @@
         <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
         <property name="mapperLocations">
 			<list>
-				<value>classpath:com/ergate/web/system/mapper/*-mapper.xml</value>
-				<value>classpath:com/ergate/web/ns/mapper/*-mapper.xml</value>
+				<value>classpath:ycw/system/mapper/*-mapper.xml</value>
+				<value>classpath:ycw/om/form/mapper/*-mapper.xml</value>
+				
 			</list>
 		</property>
     </bean>
     <!-- DAO接口所在包名，Spring会自动查找其下的类 --> 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
-        <property name="basePackage" value="ycw.system.dao,
-									        ycw.module.dao,
-									        ycw.information.dao,
-									        ycw.driver.dao,
-									        ycw.ns.dao" />
+        <property name="basePackage" value="ycw.**.dao" />
         <property name="sqlSessionFactoryBeanName" value="mySqlSessionFactory" />
     </bean>
 
