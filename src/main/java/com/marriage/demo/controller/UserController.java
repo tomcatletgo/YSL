@@ -16,7 +16,7 @@ import com.marriage.demo.entity.UserEntity;
 import com.marriage.demo.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/demo")
 public class UserController {
 	@Autowired
 	UserService userService;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.marriage.user.dao.UserDao">
+<mapper namespace="com.marriage.demo.dao.UserDao">
 
-<resultMap type="com.marriage.user.entity.UserEntity" id="UserListBase">
+<resultMap type="com.marriage.demo.entity.UserEntity" id="UserListBase">
 	<id column="userId" property="rowId" />
 	<result column="userId" property="userId"/>
 	<result column="userName" property="userName"/>
@@ -18,7 +18,7 @@
 	<result column="memberName" property="memberName"/>
 	<result column="memberPoints" property="memberPoints"/>
 	<result column="memberRegistrationDate" property="memberRegistrationDate"/>
-	<association property="memberPointsLevelEntity" column="memberPoints" javaType="com.marriage.user.entity.MemberPointsLevelEntity" select="findLevelByPoint"></association>
+	<association property="memberPointsLevelEntity" column="memberPoints" javaType="com.marriage.demo.entity.MemberPointsLevelEntity" select="findLevelByPoint"></association>
 </resultMap>
 <select id="findLevelByPoint" parameterType="int" resultMap="memberLevelInUser">
 	select 	member_level_id,
@@ -34,7 +34,7 @@
 	where 	#{memberPoints} >= member_points_bottom 
 			and #{memberPoints} &lt; member_points_top
 </select>
-<resultMap type="com.marriage.user.entity.MemberPointsLevelEntity" id="memberLevelInUser">
+<resultMap type="com.marriage.demo.entity.MemberPointsLevelEntity" id="memberLevelInUser">
 	<id column="member_level_id" property="rowId"/>
 	<result column="member_level_name" property="memberLevelName"/>
 	<result column="member_points_bottom" property="memberPointsBottom"/>
