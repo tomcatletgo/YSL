@@ -6,20 +6,20 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.marriage.demo.dao.UserDao;
+import com.marriage.demo.dao.UserDaoDemo;
 import com.marriage.demo.entity.UserEntity;
-import com.marriage.demo.service.UserService;
+import com.marriage.demo.service.UserServiceDemo;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImplDemo implements UserServiceDemo {
 	
 	@Autowired
-	private UserDao userDao;
+	private UserDaoDemo userDaoDemo;
 
 	@Override
 	public List<UserEntity> selectAllUser(Map<String, Object> map) {
 		
-		 List<UserEntity> list = userDao.selectAllUser(map); 
+		 List<UserEntity> list = userDaoDemo.selectAllUser(map); 
 		
 		return list;
 	}

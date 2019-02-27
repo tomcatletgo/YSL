@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.marriage.demo.entity.UserEntity;
 
-public interface UserService {
+public interface UserServiceDemo {
 
 	public List<UserEntity> selectAllUser(Map<String, Object> map);
 	

@@ -5,9 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.marriage.information.service.InformationService;
 import com.marriage.user.dao.UserDao;
-import com.marriage.user.entity.ManInformation;
 import com.marriage.user.service.UserService;
 
 @Service
@@ -15,8 +13,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-	@Autowired 
-	private InformationService informationService;
+	
 	
 	@Override
 	public Integer addMan(Map<String, Object> map) {

@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.marriage.demo.entity.UserEntity;
-import com.marriage.demo.service.UserService;
+import com.marriage.demo.service.UserServiceDemo;
 
 @Controller
 @RequestMapping("/demo")
-public class UserController {
+public class UserControllerDemo {
 	@Autowired
-	UserService userService;
+	UserServiceDemo userServiceDemo;
 	
 	@RequestMapping("/gg")
 	@ResponseBody
@@ -45,7 +45,7 @@ public class UserController {
 			map.put("size", size);
 			
 			List<UserEntity> userList = null;
-			userList = userService.selectAllUser(map);
+			userList = userServiceDemo.selectAllUser(map);
 			replyMap.put("userList", userList);
 		}
 		
