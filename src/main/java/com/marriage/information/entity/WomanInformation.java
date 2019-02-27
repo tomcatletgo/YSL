@@ -11,6 +11,7 @@ public class WomanInformation extends BaseEntity {
 	 */
 	private String avatar;
 	private String trueName;
+	private Integer country;
 	/**
 	 * 用户地址
 	 */
@@ -42,7 +43,7 @@ public class WomanInformation extends BaseEntity {
 	private String interest;
 	private String cookingLevel;
 	private String familyMembers;
-	private Integer hopeMaleAge;
+	private String hopeMaleAge;
 	private String hopeMaleHeightWeight;
 	private String hopeMaleMarriageHistory;
 	private String hopeMaleChild;
@@ -52,7 +53,7 @@ public class WomanInformation extends BaseEntity {
 	 */
 	private String hopeMaleAnnualIncome;
 	/**
-	 * 同居/不可
+	 * 可同居/不可
 	 */
 	private String hopeMaleCanCohabitation;
 	private String hopeMaleOccupation;
@@ -60,6 +61,15 @@ public class WomanInformation extends BaseEntity {
 	 * 留言
 	 */
 	private String messageToMale;
+	public Integer getCountry() {
+		return country;
+	}
+	public void setCountry(Integer country) {
+		this.country = country;
+	}
+	public void setHopeMaleAge(String hopeMaleAge) {
+		this.hopeMaleAge = hopeMaleAge;
+	}
 	public User getUser() {
 		return user;
 	}
@@ -198,12 +208,7 @@ public class WomanInformation extends BaseEntity {
 	public void setFamilyMembers(String familyMembers) {
 		this.familyMembers = familyMembers;
 	}
-	public Integer getHopeMaleAge() {
-		return hopeMaleAge;
-	}
-	public void setHopeMaleAge(Integer hopeMaleAge) {
-		this.hopeMaleAge = hopeMaleAge;
-	}
+	
 	public String getHopeMaleHeightWeight() {
 		return hopeMaleHeightWeight;
 	}
