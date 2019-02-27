@@ -1,7 +1,6 @@
 package com.marriage.user.entity;
 
 import com.marriage.base.entity.BaseEntity;
-import com.marriage.information.entity.ManInformation;
 import com.marriage.information.entity.WomanInformation;
 
 public class User extends BaseEntity{
@@ -13,7 +12,7 @@ public class User extends BaseEntity{
 	/**
 	 *  0 admin
 	 *  1 man
-	 *  2 woman
+	 *  2 woman（没了
 	 */
 	private Integer character;
 	private Integer activation;
@@ -22,10 +21,7 @@ public class User extends BaseEntity{
 	 * if is a man,  this use have this attribute
 	 */
 	private ManInformation manInformation;
-	/**
-	 * if is a woman,  this use have this attribute
-	 */
-	private WomanInformation womanInformation;
+	
 	
 	
 	
@@ -35,12 +31,7 @@ public class User extends BaseEntity{
 	public void setManInformation(ManInformation manInformation) {
 		this.manInformation = manInformation;
 	}
-	public WomanInformation getWomanInformation() {
-		return womanInformation;
-	}
-	public void setWomanInformation(WomanInformation womanInformation) {
-		this.womanInformation = womanInformation;
-	}
+	
 	public String getUserName() {
 		return userName;
 	}

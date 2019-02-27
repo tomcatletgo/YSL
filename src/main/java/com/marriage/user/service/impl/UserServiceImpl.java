@@ -5,9 +5,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.marriage.information.entity.ManInformation;
 import com.marriage.information.service.InformationService;
 import com.marriage.user.dao.UserDao;
+import com.marriage.user.entity.ManInformation;
 import com.marriage.user.service.UserService;
 
 @Service

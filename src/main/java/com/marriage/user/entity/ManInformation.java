@@ -1,7 +1,6 @@
-package com.marriage.information.entity;
+package com.marriage.user.entity;
 
 import com.marriage.base.entity.BaseEntity;
-import com.marriage.user.entity.User;
 
 public class ManInformation extends BaseEntity{
 	
