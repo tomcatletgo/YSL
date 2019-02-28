@@ -14,7 +14,7 @@ public class User extends BaseEntity{
 	 *  1 man
 	 *  2 woman（没了
 	 */
-	private Integer character;
+	private Integer userCharacter;
 	private Integer activation;
 	
 	/**
@@ -44,11 +44,12 @@ public class User extends BaseEntity{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Integer getCharacter() {
-		return character;
+	
+	public Integer getUserCharacter() {
+		return userCharacter;
 	}
-	public void setCharacter(Integer character) {
-		this.character = character;
+	public void setUserCharacter(Integer userCharacter) {
+		this.userCharacter = userCharacter;
 	}
 	public Integer getActivation() {
 		return activation;

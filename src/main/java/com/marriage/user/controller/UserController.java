@@ -31,13 +31,14 @@ public class UserController {
 	 * @不会添加管理员账户
 	 */
 	@RequestMapping(value="/adduser",method=RequestMethod.GET)
+	@ResponseBody
 	public Integer AddUser(@RequestParam Map<String,Object> map){
-		Integer character = Integer.parseInt(map.get("character").toString());
+		Integer character = Integer.parseInt(map.get("userCharacter").toString());
 		if(character == 1){
 			//调用添加男性方法
 			return userService.addMan(map);
 		} else if (character == 2){
-			//调用添加女性方法
+			//调用添加女性方法  ..?
 		}
 		
 		return 0;

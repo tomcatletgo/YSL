@@ -33,7 +33,7 @@ public class WomanInformation extends BaseEntity {
 	 */
 	private String occupation;
 	private String bloodGroup;
-	private String character;
+	private String womanCharacter;
 	private String moveToJapan;
 	/**
 	 * 酒 烟草
@@ -166,11 +166,15 @@ public class WomanInformation extends BaseEntity {
 	public void setBloodGroup(String bloodGroup) {
 		this.bloodGroup = bloodGroup;
 	}
-	public String getCharacter() {
-		return character;
+	
+	public String getWomanCharacter() {
+		return womanCharacter;
 	}
-	public void setCharacter(String character) {
-		this.character = character;
+	public void setWomanCharacter(String womanCharacter) {
+		this.womanCharacter = womanCharacter;
+	}
+	public String getHopeMaleAge() {
+		return hopeMaleAge;
 	}
 	public String getMoveToJapan() {
 		return moveToJapan;

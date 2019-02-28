@@ -5,8 +5,8 @@
 
 <insert id="addUser" parameterType="map" useGeneratedKeys="true" keyProperty="userId">
 	insert into user 
-	(user_name,password,character)
-	values(#{userName},#{password},#{character})
+	(user_name,password,user_character)
+	values(#{userName},#{password},#{userCharacter})
 </insert>
 
 </mapper>

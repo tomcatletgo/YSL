@@ -22,7 +22,8 @@ public class UserServiceImpl implements UserService {
 		int num = userDao.addUser(map);
 		//添加information 
 		//informationService.addManInformation();
-		System.out.println(map.get("userId").toString()+"hosjidsgga'ngwe2034rikpwqf, p023u t");
+		System.out.println(map.get("userId").toString()+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$hosjidsgga'ngwe2034rikpwqf, p023u t");
+		System.out.println(num);
 		
 		return num;
 	}
