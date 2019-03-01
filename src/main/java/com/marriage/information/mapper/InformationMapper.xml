@@ -4,7 +4,22 @@
 <mapper namespace="com.marriage.information.dao.InformationDao">
 
 
-
+<insert id="addWomanInformation" parameterType="map">
+	insert into woman_information
+	(user_id,avatar,true_name,country,address,phone,id_card,birth_date,height_and_weight
+	,identity_guarantor_true_name,identity_guarantor_phone,identity_guarantor_address,identity_guarantor_relationship_with_user
+	,marriage_history,occupation,blood_group,woman_character,move_to_japan,smoking_sake
+	,japanese_level,interest,cooking_level,family_members,hope_male_age,hope_male_height_weight
+	,hope_male_marriage_history,hope_male_child,hope_male_education_level,hope_male_annual_income
+	,hope_male_can_cohabitation,hope_male_occupation,message_to_male)
+	
+	values(#{userId},#{avatar},#{trueName},#{country},#{address},#{phone},#{idCard},#{birthDate},#{heightAndWeight}
+	,#{identityGuarantorTrueName},#{identityGuarantorPhone},#{identityGuarantorAddress},#{identityGuarantorRelationshipWithUser}
+	,#{marriageHistory},#{occupation},#{bloodGroup},#{womanCharacter},#{movToJapan},#{smokingSake}
+	,#{japaneseLevel},#{interest},#{cookingLevel},#{familyMembers},#{hopeMaleAge},#{hopeMaleHeightWeight}
+	,#{hopeMaleMarriageHistory},#{hopeMaleChild},#{hopeMaleEducationLevel},#{hopeMaleAnnualIncome}
+	,#{hopeMaleCanCohabitation},#{hopeMaleOccupation},#{messageToMale})
+</insert>
 
 
 

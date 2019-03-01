@@ -1,10 +1,21 @@
 package com.marriage.information.entity;
 
+import java.util.List;
+
 import com.marriage.base.entity.BaseEntity;
+import com.marriage.img.entity.ImgEntity;
 import com.marriage.user.entity.User;
 
 public class WomanInformation extends BaseEntity {
+	/**
+	 * user 对象
+	 */
 	private User user;
+	/**
+	 * imgs
+	 */
+	private List<ImgEntity> imgs;
+	
 	private Integer userId;
 	/**
 	 * 头像图片地址
@@ -61,6 +72,21 @@ public class WomanInformation extends BaseEntity {
 	 * 留言
 	 */
 	private String messageToMale;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<ImgEntity> getImgs() {
+		return imgs;
+	}
+	public void setImgs(List<ImgEntity> imgs) {
+		this.imgs = imgs;
+	}
 	public Integer getCountry() {
 		return country;
 	}

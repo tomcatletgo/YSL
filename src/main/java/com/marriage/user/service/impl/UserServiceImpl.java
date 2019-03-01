@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.marriage.img.service.ImgService;
 import com.marriage.user.dao.UserDao;
 import com.marriage.user.service.UserService;
 
@@ -15,6 +16,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private ImgService imgService;
 	
 	@Transactional(rollbackFor = Exception.class)
 	@Override
@@ -36,9 +39,9 @@ public class UserServiceImpl implements UserService {
 		//System.out.println(map.get("userId").toString()+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$hosjidsgga'ngwe2034rikpwqf, p023u t");
 		//System.out.println(num); ok
 		
-		//如果有图片添加图片url
+		//如果有图片添加图片url    TODO  测试
 		if (map.containsKey("imgUrl") && map.get("imgUrl") != null) {
-			
+			imgService.addUserImg(map);
 		}
 		
 		return num;

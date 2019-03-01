@@ -39,7 +39,7 @@ public class UserController {
 		}
 		//TODO 图片上传
 		
-		//
+		//url放进map.imgUrl TODO  测试
 		
 		
 		if(character == 1){
@@ -47,6 +47,7 @@ public class UserController {
 			return userService.addMan(map);
 		} else if (character == 2){
 			//调用添加女性方法  ..?
+			//弃疗  扔进information那边  因为没账号
 		}
 		
 		return 0;
