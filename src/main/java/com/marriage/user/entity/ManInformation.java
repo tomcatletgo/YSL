@@ -1,6 +1,9 @@
 package com.marriage.user.entity;
 
+import java.util.List;
+
 import com.marriage.base.entity.BaseEntity;
+import com.marriage.img.entity.ImgEntity;
 
 public class ManInformation extends BaseEntity{
 	
@@ -8,6 +11,10 @@ public class ManInformation extends BaseEntity{
 	 * 信息对应的用户对象
 	 */
 	private User user;
+	/**
+	 * imgs
+	 */
+	private List<ImgEntity> imgs;
 	
 	private Integer userId;
 	private String trueName;
@@ -123,6 +130,12 @@ public class ManInformation extends BaseEntity{
 	
 	
 	
+	public List<ImgEntity> getImgs() {
+		return imgs;
+	}
+	public void setImgs(List<ImgEntity> imgs) {
+		this.imgs = imgs;
+	}
 	public User getUser() {
 		return user;
 	}

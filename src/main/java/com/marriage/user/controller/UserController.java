@@ -33,7 +33,15 @@ public class UserController {
 	@RequestMapping(value="/adduser",method=RequestMethod.GET)
 	@ResponseBody
 	public Integer AddUser(@RequestParam Map<String,Object> map){
-		Integer character = Integer.parseInt(map.get("userCharacter").toString());
+		Integer character = null;
+		if(map.get("userCharacter")!=null){
+			character = Integer.parseInt(map.get("userCharacter").toString());
+		}
+		//TODO 图片上传
+		
+		//
+		
+		
 		if(character == 1){
 			//调用添加男性方法
 			return userService.addMan(map);

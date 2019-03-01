@@ -9,4 +9,20 @@
 	values(#{userName},#{password},#{userCharacter})
 </insert>
 
+
+<insert id="addManInformation" parameterType="map">
+	insert into man_information
+	(user_id,true_name,karigana,romaji,postal_code,prefectures,municipal_ward,street_bunch
+	,building_name,ancestral_home,phone,mobile_phone,email,other_email,line_id,date_of_birth,age
+	,hobby,qualification,smoking,sake,height,weight,blood_group,education,occupation,annual_income
+	,assets,holiday,residence_form,home_rowing,family_members,marriage_history,living_together
+	,remarriage_num,remarriage_situation,divorce_reason,message,remark)
+	
+	values(#{userId},#{trueName},#{karigana},#{romaji},#{postalCode},#{prefectures},#{municipalWard},#{streetBunch}
+	,#{buildingName},#{ancestralHome},#{phone},#{mobilePhone},#{email},#{otherEmail},#{lineId},#{dateOfBirth},#{age}
+	,#{hobby},#{qualification},#{smoking},#{sake},#{height},#{weight},#{bloodGroup},#{education},#{occupation},#{annualIncome}
+	,#{assets},#{holiday},#{residenceForm},#{homeRowing},#{familyMembers},#{marriageHistory},#{livingTogether}
+	,#{remarriageNum},#{remarriageSituation},#{divorceReason},#{message},#{remark})
+</insert>
+
 </mapper>
