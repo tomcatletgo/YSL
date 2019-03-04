@@ -25,4 +25,84 @@
 	,#{remarriageNum},#{remarriageSituation},#{divorceReason},#{message},#{remark})
 </insert>
 
+
+<resultMap type="com.marriage.user.entity.ManInformation" id="manResoultMap">
+	
+	<result column="user_id" property="userId"/>
+	<result column="true_name" property="trueName"/>
+	<result column="karigana" property="karigana"/>
+	<result column="romaji" property="romaji"/>
+	<result column="postal_code" property="postalCode"/>
+	<result column="prefectures" property="prefectures"/>
+	<result column="municipal_ward" property="municipalWard"/>
+	<result column="street_bunch" property="streetBunch"/>
+	<result column="building_name" property="buildingName"/>
+	<result column="ancestral_home" property="ancestralHome"/>
+	<result column="phone" property="phone"/>
+	<result column="mobile_phone" property="mobilePhone"/>
+	<result column="email" property="email"/>
+	<result column="other_email" property="otherEmail"/>
+	<result column="line_id" property="lineId"/>
+	<result column="date_of_birth" property="dateOfBirth"/>
+	<result column="age" property="age"/>
+	<result column="hobby" property="hobby"/>
+	<result column="qualification" property="qualification"/>
+	<result column="smoking" property="smoking"/>
+	<result column="sake" property="sake"/>
+	<result column="height" property="height"/>
+	<result column="weight" property="weight"/>
+	<result column="blood_group" property="bloodGroup"/>
+	<result column="education" property="education"/>
+	<result column="occupation" property="occupation"/>
+	<result column="annual_income" property="annualIncome"/>
+	<result column="assets" property="assets"/>
+	<result column="holiday" property="holiday"/>
+	<result column="residence_form" property="residenceForm"/>
+	<result column="home_rowing" property="homeRowing"/>
+	<result column="family_members" property="familyMembers"/>
+	<result column="marriage_history" property="marriageHistory"/>
+	<result column="living_together" property="livingTogether"/>
+	<result column="remarriage_num" property="remarriageNum"/>
+	<result column="remarriage_situation" property="remarriageSituation"/>
+	<result column="divorce_reason" property="divorceReason"/>
+	<result column="message" property="message"/>
+	<result column="remark" property="remark"/>
+	<association property="user" javaType="com.marriage.user.entity.User">
+		<result column="user_id" property="rowId"/>
+		<result column="user_name" property="userName"/>
+		<result column="password" property="password"/>
+		<result column="user_character" property="userCharacter"/>
+		<result column="activation" property="activation"/>
+		<result column="del_flag" property="delFlag"/>
+	</association>
+</resultMap>
+
+<select id="selectManInformationByPage" resultMap="manResoultMap" parameterType="map">
+
+	select  mi.user_id,mi.true_name,mi.karigana,mi.romaji,mi.postal_code,mi.prefectures,mi.municipal_ward,mi.street_bunch
+			,mi.building_name,mi.ancestral_home,mi.phone,mobile_phone,mi.email,mi.other_email,mi.line_id,mi.date_of_birth,mi.age
+			,mi.hobby,mi.qualification,mi.smoking,mi.sake,mi.height,mi.weight,mi.blood_group,mi.education,mi.occupation,mi.annual_income
+			,mi.assets,mi.holiday,mi.residence_form,mi.home_rowing,mi.family_members,mi.marriage_history,mi.living_together
+			,mi.remarriage_num,mi.remarriage_situation,mi.divorce_reason,mi.message,mi.remark
+			,us.user_name,us.password,us.user_character,us.activation,us.del_flag
+	
+	from man_information AS mi 
+		 join user AS us on mi.user_id =  us.user_id
+		 
+	where us.del_flag = 0 
+		  and us.activation = 0 or us.activation = 1 
+		  <!-- <if test="#{maxPoint} != null">
+    		and m.member_points_top  &lt; #{maxPoint}
+    	</if> -->
+
+	order by us.user_id desc
+
+	<if test="#{start} != null">
+    	limit #{start},#{size}
+    </if>
+
+</select>
+
+
+
 </mapper>

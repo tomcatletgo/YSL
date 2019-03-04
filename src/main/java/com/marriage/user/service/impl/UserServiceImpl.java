@@ -1,5 +1,6 @@
 package com.marriage.user.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.marriage.img.service.ImgService;
 import com.marriage.user.dao.UserDao;
+import com.marriage.user.entity.ManInformation;
 import com.marriage.user.service.UserService;
 
 @Service
@@ -152,5 +154,14 @@ public class UserServiceImpl implements UserService {
 		
 		
 		return 0;
+	}
+
+
+
+
+	@Override
+	public List<ManInformation> selectManInformationBypage(Map<String, Object> map) {
+		
+		return userDao.selectManInformationByPage(map);
 	}
 }

@@ -1,5 +1,7 @@
 package com.marriage.user.controller;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.marriage.user.entity.ManInformation;
 import com.marriage.user.service.UserService;
 
 
@@ -51,5 +54,40 @@ public class UserController {
 		}
 		
 		return 0;
+	}
+	
+	
+	/**
+	 * 查寻男性信息  的第几页
+	 */
+	@RequestMapping(value="/select",method=RequestMethod.GET)
+	@ResponseBody 
+	public Map<String,Object> selectManInformationByPage(@RequestParam Map<String,Object> map){
+		Map<String, Object> replyMap = new HashMap<String,Object>();
+		
+		//页数
+		if(map.get("page") != null && map.get("size") != null){
+			//算页
+			int page = Integer.parseInt(map.get("page").toString());
+			int size = Integer.parseInt(map.get("size").toString());
+			if (page <= 0 || size <= 0) {
+				replyMap.put("message", "page error");
+			}
+			int start = size*(page-1);
+			map.put("start", start);
+			map.put("page", page);
+			map.put("size", size);
+			
+			//接收的list
+			List<ManInformation> manList = null;
+			manList = userService.selectManInformationBypage(map);
+			//放进map去
+			replyMap.put("manList", manList);
+			
+		} else {
+			replyMap.put("message", "page error");
+		}
+		
+		return replyMap;
 	}
 }
