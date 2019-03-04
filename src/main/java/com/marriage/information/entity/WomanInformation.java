@@ -16,7 +16,7 @@ public class WomanInformation extends BaseEntity {
 	 */
 	private List<ImgEntity> imgs;
 	
-	private Integer userId;
+	private Integer womanId;
 	/**
 	 * 头像图片地址
 	 */
@@ -102,11 +102,12 @@ public class WomanInformation extends BaseEntity {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public Integer getUserId() {
-		return userId;
+
+	public Integer getWomanId() {
+		return womanId;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setWomanId(Integer womanId) {
+		this.womanId = womanId;
 	}
 	public String getAvatar() {
 		return avatar;
