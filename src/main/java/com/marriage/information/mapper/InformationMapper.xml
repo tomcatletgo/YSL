@@ -6,14 +6,14 @@
 
 <insert id="addWomanInformation" parameterType="map">
 	insert into woman_information
-	(user_id,avatar,true_name,country,address,phone,id_card,birth_date,height_and_weight
+	(woman_id,avatar,true_name,country,address,phone,id_card,birth_date,height_and_weight
 	,identity_guarantor_true_name,identity_guarantor_phone,identity_guarantor_address,identity_guarantor_relationship_with_user
 	,marriage_history,occupation,blood_group,woman_character,move_to_japan,smoking_sake
 	,japanese_level,interest,cooking_level,family_members,hope_male_age,hope_male_height_weight
 	,hope_male_marriage_history,hope_male_child,hope_male_education_level,hope_male_annual_income
 	,hope_male_can_cohabitation,hope_male_occupation,message_to_male)
 	
-	values(#{userId},#{avatar},#{trueName},#{country},#{address},#{phone},#{idCard},#{birthDate},#{heightAndWeight}
+	values(#{womanId},#{avatar},#{trueName},#{country},#{address},#{phone},#{idCard},#{birthDate},#{heightAndWeight}
 	,#{identityGuarantorTrueName},#{identityGuarantorPhone},#{identityGuarantorAddress},#{identityGuarantorRelationshipWithUser}
 	,#{marriageHistory},#{occupation},#{bloodGroup},#{womanCharacter},#{movToJapan},#{smokingSake}
 	,#{japaneseLevel},#{interest},#{cookingLevel},#{familyMembers},#{hopeMaleAge},#{hopeMaleHeightWeight}
@@ -22,6 +22,68 @@
 </insert>
 
 
+<resultMap type="com.marriage.information.entity.WomanInformation" id="womanResultMap">
+	
+	<result column="woman_id" property="womanId"/>
+	<result column="woman_id" property="rowId"/>
+	<result column="avatar" property="avatar"/>
+	<result column="true_name" property="trueName"/>
+	<result column="country" property="country"/>
+	<result column="address" property="address"/>
+	<result column="phone" property="phone"/>
+	<result column="id_card" property="idCard"/>
+	<result column="birth_date" property="birthDate"/>
+	<result column="height_and_weight" property="heightAndWeight"/>	
+	<result column="identity_guarantor_true_name" property="identityGuarantorTrueName"/>
+	<result column="identity_guarantor_phone" property="identityGuarantorPhone"/>
+	<result column="identity_guarantor_address" property="identityGuarantorAddress"/>
+	<result column="identity_guarantor_relationship_with_user" property="identityGuarantorRelationshipWithUser"/>
+	<result column="marriage_history" property="marriageHistory"/>
+	<result column="occupation" property="occupation"/>
+	<result column="blood_group" property="bloodGroup"/>
+	<result column="woman_character" property="womanCharacter"/>
+	<result column="move_to_japan" property="movToJapan"/>
+	<result column="smoking_sake" property="smokingSake"/>
+	<result column="japanese_level" property="japaneseLevel"/>
+	<result column="interest" property="interest"/>
+	<result column="cooking_level" property="cookingLevel"/>
+	<result column="family_members" property="familyMembers"/>
+	<result column="hope_male_age" property="hopeMaleAge"/>
+	<result column="hope_male_height_weight" property="hopeMaleHeightWeight"/>
+	<result column="hope_male_marriage_history" property="hopeMaleMarriageHistory"/>
+	<result column="hope_male_child" property="hopeMaleChild"/>
+	<result column="hope_male_education_level" property="hopeMaleEducationLevel"/>
+	<result column="hope_male_annual_income" property="hopeMaleAnnualIncome"/>
+	<result column="hope_male_can_cohabitation" property="hopeMaleMarriageHistory"/>
+	<result column="hope_male_occupation" property="hopeMaleOccupation"/>
+	<result column="message_to_male" property="messageToMale"/>
+	<result column="del_flag" property="delFlag" />
+</resultMap>
+
+
+<select id="selectWomanInformationBypage" resultMap="womanResultMap" parameterType="map">
+
+	select woman_id,avatar,true_name,country,address,phone,id_card,birth_date,height_and_weight
+	,identity_guarantor_true_name,identity_guarantor_phone,identity_guarantor_address,identity_guarantor_relationship_with_user
+	,marriage_history,occupation,blood_group,woman_character,move_to_japan,smoking_sake
+	,japanese_level,interest,cooking_level,family_members,hope_male_age,hope_male_height_weight
+	,hope_male_marriage_history,hope_male_child,hope_male_education_level,hope_male_annual_income
+	,hope_male_can_cohabitation,hope_male_occupation,message_to_male,del_flag
+	
+	from woman_information
+	
+	where del_flag = 0
+	 <!-- <if test="#{maxPoint} != null">
+    		and m.member_points_top  &lt; #{maxPoint}
+    	</if> -->
+	
+	order by woman_id desc
+	
+	<if test="#{start} != null">
+    	limit #{start},#{size}
+    </if>
+	
+</select>
 
 
 </mapper>

@@ -1,5 +1,7 @@
 package com.marriage.information.controller;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.marriage.information.service.InformationService;
+import com.marriage.user.entity.ManInformation;
 
 
 @Controller
@@ -23,7 +26,7 @@ public class InformationController {
 	
 	
 	
-	@RequestMapping(value="/add",method=RequestMethod.GET)//TODO  post
+	@RequestMapping(value="/add",method=RequestMethod.POST)//TODO  post
 	@ResponseBody
 	public Integer addWomanInformation(@RequestParam Map<String,Object> map){
 		int num = 0;
@@ -37,5 +40,39 @@ public class InformationController {
 		}
 		
 		return num;
+	}
+	
+	
+	@RequestMapping(value="/select",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> selectWomanInformationByPage(@RequestParam Map<String,Object> map){
+		Map<String, Object> replyMap = new HashMap<String,Object>();
+		
+		//页数
+		if(map.get("page") != null && map.get("size") != null){
+			//算页
+			int page = Integer.parseInt(map.get("page").toString());
+			int size = Integer.parseInt(map.get("size").toString());
+			if (page <= 0 || size <= 0) {
+				replyMap.put("message", "page error");
+			}
+			int start = size*(page-1);
+			map.put("start", start);
+			map.put("page", page);
+			map.put("size", size);
+			
+			//接收的list
+			List<ManInformation> womanList = null;
+			womanList = informationService.selectWomanInformationBypage(map);
+			//放进map去
+			replyMap.put("womanList", womanList);
+			
+		} else {
+			replyMap.put("message", "page error");
+		}
+		
+		
+		
+		return replyMap;
 	}
 }
