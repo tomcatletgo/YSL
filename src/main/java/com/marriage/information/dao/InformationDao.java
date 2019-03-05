@@ -11,4 +11,6 @@ public interface InformationDao {
 
 	List<ManInformation> selectWomanInformationBypage(Map<String, Object> map);
 
+	Integer updateWomanInformationByWomanId(Map<String, Object> map);
+
 }

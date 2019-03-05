@@ -11,4 +11,6 @@ public interface InformationService {
 
 	List<ManInformation> selectWomanInformationBypage(Map<String, Object> map);
 
+	Integer updateWomanInformationByWomanId(Map<String, Object> map);
+
 }

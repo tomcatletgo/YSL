@@ -75,4 +75,19 @@ public class InformationController {
 		
 		return replyMap;
 	}
+	
+	
+	
+	@RequestMapping(value="/update")
+	@ResponseBody
+	public Integer updateWomanInformationByWomanId(@RequestParam Map<String,Object> map){
+		
+		if (map.get("womanId") != null && map.size() > 1) {
+			
+			return informationService.updateWomanInformationByWomanId(map);
+		}
+		
+		return 0;
+	}
+	
 }

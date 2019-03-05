@@ -95,7 +95,7 @@ public class UserController {
 	@ResponseBody
 	public Integer updateManInformationByUserId(@RequestParam Map<String,Object> map){
 		
-		if (map.get("userId") != null) {
+		if (map.get("userId") != null && map.size() > 1) {
 			
 			return userService.updateManInformationByUserId(map);
 		}

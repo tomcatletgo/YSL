@@ -38,4 +38,10 @@ public class InformationServiceImpl implements InformationService {
 		return informationDao.selectWomanInformationBypage(map);
 	}
 
+	@Override
+	public Integer updateWomanInformationByWomanId(Map<String, Object> map) {
+
+		return informationDao.updateWomanInformationByWomanId(map);
+	}
+
 }
