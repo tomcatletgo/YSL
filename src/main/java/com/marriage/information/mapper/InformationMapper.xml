@@ -4,7 +4,7 @@
 <mapper namespace="com.marriage.information.dao.InformationDao">
 
 
-<insert id="addWomanInformation" parameterType="map">
+<insert id="addWomanInformation" parameterType="map" useGeneratedKeys="true" keyProperty="womanId">
 	insert into woman_information
 	(woman_id,avatar,true_name,country,address,phone,id_card,birth_date,height_and_weight
 	,identity_guarantor_true_name,identity_guarantor_phone,identity_guarantor_address,identity_guarantor_relationship_with_user
@@ -58,8 +58,18 @@
 	<result column="hope_male_occupation" property="hopeMaleOccupation"/>
 	<result column="message_to_male" property="messageToMale"/>
 	<result column="del_flag" property="delFlag" />
+	<collection column="woman_id" property="imgs" select="selectImgsById"></collection>
 </resultMap>
-
+<select id="selectImgsById" resultType="com.marriage.img.entity.ImgEntity">
+	select  img_id AS imgId
+		    ,img_id AS rowId
+			,woman_id AS womanId
+			,img_url AS imgUrl
+			,del_flag AS delFlag
+	
+	from img 
+	where woman_id = #{woman_id}
+</select>
 
 <select id="selectWomanInformationBypage" resultMap="womanResultMap" parameterType="map">
 

@@ -90,4 +90,16 @@ public class UserController {
 		
 		return replyMap;
 	}
+	
+	@RequestMapping(value="/update")
+	@ResponseBody
+	public Integer updateManInformationByUserId(@RequestParam Map<String,Object> map){
+		
+		if (map.get("userId") != null) {
+			
+			return userService.updateManInformationByUserId(map);
+		}
+		
+		return 0;
+	}
 }

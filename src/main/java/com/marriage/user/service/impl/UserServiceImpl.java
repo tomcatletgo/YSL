@@ -28,12 +28,13 @@ public class UserServiceImpl implements UserService {
 		//添加账号 返回id进map
 		int num = userDao.addUser(map);
 		
-		//测试用添加map值 TODO   会删
-		putMapInformationsss(map);
+		//测试用添加map值    会删
+		//putMapInformationsss(map);
 		
 		//可以空的信息若是空 添加"无"
 		addNullToNone(map);
 		
+		//应该还有个添加图片。。。那么图片是怎么传过来的md.....   TODO
 		
 		
 		//添加information 
@@ -163,5 +164,15 @@ public class UserServiceImpl implements UserService {
 	public List<ManInformation> selectManInformationBypage(Map<String, Object> map) {
 		
 		return userDao.selectManInformationByPage(map);
+	}
+
+
+
+
+	@Override
+	public Integer updateManInformationByUserId(Map<String, Object> map) {
+		
+		
+		return userDao.updateManInformationByUserId(map);
 	}
 }

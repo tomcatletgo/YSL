@@ -13,4 +13,6 @@ public interface UserDao {
 
 	List<ManInformation> selectManInformationByPage(Map<String, Object> map);
 
+	Integer updateManInformationByUserId(Map<String, Object> map);
+
 }

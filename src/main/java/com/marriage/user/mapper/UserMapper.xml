@@ -75,7 +75,18 @@
 		<result column="activation" property="activation"/>
 		<result column="del_flag" property="delFlag"/>
 	</association>
+	<collection column="user_id" property="imgs" select="selectImgsByUserId"></collection>
 </resultMap>
+<select id="selectImgsByUserId" resultType="com.marriage.img.entity.ImgEntity">
+	select  img_id AS imgId
+		    ,img_id AS rowId
+			,user_id AS userId
+			,img_url AS imgUrl
+			,del_flag AS delFlag
+	
+	from img 
+	where user_id = #{user_id}
+</select>
 
 <select id="selectManInformationByPage" resultMap="manResoultMap" parameterType="map">
 
@@ -103,6 +114,127 @@
 
 </select>
 
+<update id="updateManInformationByUserId">
 
+	 update 
+      man_information
+      <set>
+      <if test="trueName != null and trueName != '' ">
+      true_name = #{trueName},
+      </if>
+      <if test="karigana != null and karigana != '' ">
+      karigana = #{karigana},
+      </if>
+      <if test="romaji != null and romaji != '' ">
+      romaji = #{romaji},
+      </if>
+      <if test="postalCode != null and postalCode != '' ">
+      postal_code = #{postalCode},
+      </if>
+      <if test="prefectures != null and prefectures != '' ">
+      prefectures = #{prefectures},
+      </if>
+      <if test="municipalWard != null and municipalWard != '' ">
+      municipal_ward = #{municipalWard},
+      </if>
+      <if test="streetBunch != null and streetBunch != '' ">
+      street_bunch = #{streetBunch},
+      </if>
+      <if test="buildingName != null and buildingName != '' ">
+      building_name = #{buildingName},
+      </if>
+      <if test="ancestralHome != null and ancestralHome != '' ">
+      ancestral_home = #{ancestralHome},
+      </if>
+      <if test="phone != null and phone != '' ">
+      phone = #{phone},
+      </if>
+      <if test="mobilePhone != null and mobilePhone != '' ">
+      mobile_phone = #{mobilePhone},
+      </if>
+      <if test="email != null and email != '' ">
+      email = #{email},
+      </if>
+      <if test="lineId != null and lineId != '' ">
+      line_id = #{lineId},
+      </if>
+      <if test="dateOfBirth != null and dateOfBirth != '' ">
+      date_of_birth = #{dateOfBirth},
+      </if>
+      <if test="age != null and age != '' ">
+      age = #{age},
+      </if>
+      <if test="hobby != null and hobby != '' ">
+      hobby = #{hobby},
+      </if>
+      <if test="qualification != null and qualification != '' ">
+      qualification = #{qualification},
+      </if>
+      <if test="smoking != null and smoking != '' ">
+      smoking = #{smoking},
+      </if>
+      <if test="sake != null and sake != '' ">
+      sake = #{sake},
+      </if>
+      <if test="height != null and height != '' ">
+      height = #{height},
+      </if>
+      <if test="weight != null and weight != '' ">
+      weight = #{weight},
+      </if>
+      <if test="bloodGroup != null and bloodGroup != '' ">
+      blood_group = #{bloodGroup},
+      </if>
+      <if test="education != null and education != '' ">
+      education = #{education},
+      </if>
+      <if test="occupation != null and occupation != '' ">
+      occupation = #{occupation},
+      </if>
+      <if test="annualIncome != null and annualIncome != '' ">
+      annual_income = #{annualIncome},
+      </if>
+      <if test="assets != null and assets != '' ">
+      assets = #{assets},
+      </if>
+      <if test="holiday != null and holiday != '' ">
+      holiday = #{holiday},
+      </if>
+      <if test="residenceForm != null and residenceForm != '' ">
+      residence_form = #{residenceForm},
+      </if>
+      <if test="homeRowing != null and homeRowing != '' ">
+      home_rowing = #{homeRowing},
+      </if>
+      <if test="familyMembers != null and familyMembers != '' ">
+      family_members = #{familyMembers},
+      </if>
+      <if test="marriageHistory != null and marriageHistory != '' ">
+      marriage_history = #{marriageHistory},
+      </if>
+      <if test="livingTogether != null and livingTogether != '' ">
+      living_together = #{livingTogether},
+      </if>
+      <if test="remarriageNum != null and remarriageNum != '' ">
+      remarriage_num = #{remarriageNum},
+      </if>
+      <if test="remarriageSituation != null and remarriageSituation != '' ">
+      remarriage_situation = #{remarriageSituation},
+      </if>
+      <if test="divorceReason != null and divorceReason != '' ">
+      divorce_reason = #{divorceReason},
+      </if>
+      <if test="message != null and message != '' ">
+      message = #{message},
+      </if>
+      <if test="remark != null and remark != '' ">
+      remark = #{remark},
+      </if>
+      
+      </set>
+      where 
+      user_id=#{userId}
+
+</update>
 
 </mapper>

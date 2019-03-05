@@ -21,8 +21,14 @@ public class InformationServiceImpl implements InformationService {
 	
 	@Override
 	public Integer addWomanInformation(Map<String,Object> map) {
-		// TODO Auto-generated method stub
-		return informationDao.addWomanInformation(map);
+		int count = 0;
+		
+		//insert  返回id到  map.womanId
+		count = informationDao.addWomanInformation(map);
+		
+		//TODO  大概是添加图片的位置
+		
+		return  count;
 	}
 
 	@Override

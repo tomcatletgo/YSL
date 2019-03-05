@@ -11,4 +11,6 @@ public interface UserService {
 
 	List<ManInformation> selectManInformationBypage(Map<String, Object> map);
 
+	Integer updateManInformationByUserId(Map<String, Object> map);
+
 }
