@@ -175,4 +175,13 @@ public class UserServiceImpl implements UserService {
 		
 		return userDao.updateManInformationByUserId(map);
 	}
+
+
+
+
+	@Override
+	public Integer deleteUserById(Map<String, Object> map) {
+		
+		return userDao.updateUserDelFlagByIds(map);
+	}
 }

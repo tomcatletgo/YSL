@@ -90,4 +90,26 @@ public class InformationController {
 		return 0;
 	}
 	
+	@RequestMapping(value="/delete")
+	@ResponseBody
+	public Integer deleteWomanById(@RequestParam Map<String,Object> map){
+		
+		//大概需要取个数组 放 map.ids
+		
+		if (map.get("userId") != null || map.get("ids") != null) {
+			
+			//id同样当做数组放进ids里
+			if (map.get("userId") != null) {
+				
+				String id = map.get("userId").toString();
+				map.put("ids", id);
+			}
+			
+			
+			return informationService.deleteWomanById(map);
+		}
+		
+		return 0;
+	}
+	
 }

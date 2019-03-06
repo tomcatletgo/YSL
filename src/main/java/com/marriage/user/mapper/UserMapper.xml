@@ -237,4 +237,10 @@
 
 </update>
 
+
+<update id="updateUserDelFlagByIds">
+	update user 
+	set del_flag = 1
+	where user_id in (${ids})
+</update>
 </mapper>

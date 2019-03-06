@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.object.UpdatableSqlQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -98,6 +99,29 @@ public class UserController {
 		if (map.get("userId") != null && map.size() > 1) {
 			
 			return userService.updateManInformationByUserId(map);
+		}
+		
+		return 0;
+	}
+	
+	
+	@RequestMapping(value="/delete")
+	@ResponseBody
+	public Integer deleteUserById(@RequestParam Map<String,Object> map){
+		
+		//大概需要取个数组 放 map.ids
+		
+		if (map.get("userId") != null || map.get("ids") != null) {
+			
+			//id同样当做数组放进ids里
+			if (map.get("userId") != null) {
+				
+				String id = map.get("userId").toString();
+				map.put("ids", id);
+			}
+			
+			
+			return userService.deleteUserById(map);
 		}
 		
 		return 0;

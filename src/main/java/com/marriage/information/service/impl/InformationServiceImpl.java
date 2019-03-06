@@ -44,4 +44,12 @@ public class InformationServiceImpl implements InformationService {
 		return informationDao.updateWomanInformationByWomanId(map);
 	}
 
+	@Override
+	public Integer deleteWomanById(Map<String, Object> map) {
+
+		
+		
+		return informationDao.updateWomanDelFlagByIds(map);
+	}
+
 }

@@ -195,4 +195,12 @@
 	</set>
 </update>
 
+
+<update id="updateWomanDelFlagByIds">
+
+	update woman_information
+	set del_flag = 1
+	where woman_id in (${ids})
+	
+</update>
 </mapper>

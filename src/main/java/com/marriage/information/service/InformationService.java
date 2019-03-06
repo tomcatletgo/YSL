@@ -13,4 +13,6 @@ public interface InformationService {
 
 	Integer updateWomanInformationByWomanId(Map<String, Object> map);
 
+	Integer deleteWomanById(Map<String, Object> map);
+
 }

@@ -15,4 +15,6 @@ public interface UserDao {
 
 	Integer updateManInformationByUserId(Map<String, Object> map);
 
+	Integer updateUserDelFlagByIds(Map<String, Object> map);
+
 }

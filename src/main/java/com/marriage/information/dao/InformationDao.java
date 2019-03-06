@@ -13,4 +13,6 @@ public interface InformationDao {
 
 	Integer updateWomanInformationByWomanId(Map<String, Object> map);
 
+	Integer updateWomanDelFlagByIds(Map<String, Object> map);
+
 }

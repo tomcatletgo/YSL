@@ -13,4 +13,6 @@ public interface UserService {
 
 	Integer updateManInformationByUserId(Map<String, Object> map);
 
+	Integer deleteUserById(Map<String, Object> map);
+
 }
