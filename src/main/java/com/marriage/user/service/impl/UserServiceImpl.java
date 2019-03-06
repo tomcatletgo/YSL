@@ -199,7 +199,7 @@ public class UserServiceImpl implements UserService {
 			return 0;
 		} else if (users.size() >= 1) {
 			
-			return 1;
+			return users.size();
 		}
 		
 		return -5;
