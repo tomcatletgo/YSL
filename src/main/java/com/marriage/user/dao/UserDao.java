@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.marriage.user.entity.ManInformation;
+import com.marriage.user.entity.User;
 
 public interface UserDao {
 
@@ -16,5 +17,7 @@ public interface UserDao {
 	Integer updateManInformationByUserId(Map<String, Object> map);
 
 	Integer updateUserDelFlagByIds(Map<String, Object> map);
+
+	List<User> selectUserByUserName(String userName);
 
 }

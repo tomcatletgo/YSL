@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.druid.sql.visitor.functions.If;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.marriage.user.entity.ManInformation;
 import com.marriage.user.service.UserService;
 
@@ -125,5 +127,22 @@ public class UserController {
 		}
 		
 		return 0;
+	}
+	
+	
+	//查看账号是否存在 0 not used  1 is used  -1 no userName  -5 error(不可能就是..)
+	@RequestMapping(value="/checkusername")
+	@ResponseBody
+	public Integer checkUserNameIsUsedOrNot(@RequestParam("userName") String userName){
+		
+		//System.out.println(userName+"########################################################################");
+		
+		if (null != userName) {
+			
+			return userService.checkUserNameIsUsedOrNot(userName);
+		}
+		
+		
+		return -1;
 	}
 }

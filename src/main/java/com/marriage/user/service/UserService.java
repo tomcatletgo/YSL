@@ -15,4 +15,6 @@ public interface UserService {
 
 	Integer deleteUserById(Map<String, Object> map);
 
+	Integer checkUserNameIsUsedOrNot(String userName);
+
 }

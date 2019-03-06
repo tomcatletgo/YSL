@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.marriage.img.service.ImgService;
 import com.marriage.user.dao.UserDao;
 import com.marriage.user.entity.ManInformation;
+import com.marriage.user.entity.User;
 import com.marriage.user.service.UserService;
 
 @Service
@@ -183,5 +184,24 @@ public class UserServiceImpl implements UserService {
 	public Integer deleteUserById(Map<String, Object> map) {
 		
 		return userDao.updateUserDelFlagByIds(map);
+	}
+
+
+
+
+	@Override
+	public Integer checkUserNameIsUsedOrNot(String userName) {
+		
+		List<User> users = userDao.selectUserByUserName(userName); 
+		
+		if (users.size() == 0) {
+			
+			return 0;
+		} else if (users.size() >= 1) {
+			
+			return 1;
+		}
+		
+		return -5;
 	}
 }

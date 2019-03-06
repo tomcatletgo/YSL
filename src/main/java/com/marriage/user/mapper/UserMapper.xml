@@ -243,4 +243,18 @@
 	set del_flag = 1
 	where user_id in (${ids})
 </update>
+
+
+<select id="selectUserByUserName" parameterType="string" resultType="com.marriage.user.entity.User">
+
+	select 	user_name AS userName
+			,user_id AS　userId
+	
+	from user
+	
+	where user_name = #{userName}
+	
+	
+</select>
+
 </mapper>
