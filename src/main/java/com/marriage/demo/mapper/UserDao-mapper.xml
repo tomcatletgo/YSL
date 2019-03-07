@@ -73,7 +73,7 @@
     
     order by u.user_id
     
-    <if test="#{start} != null">
+    <if test="start != null">
     	limit #{start},#{size}
     </if>
     

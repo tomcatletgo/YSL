@@ -108,7 +108,7 @@
 
 	order by us.user_id desc
 
-	<if test="#{start} != null">
+	<if test="start != null">
     	limit #{start},#{size}
     </if>
 
