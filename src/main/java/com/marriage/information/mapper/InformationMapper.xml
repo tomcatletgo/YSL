@@ -193,6 +193,8 @@
       message_to_male = #{messageToMale},
     </if>
 	</set>
+	
+	where woman_id = #{womanId}
 </update>
 
 

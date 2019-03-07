@@ -30,9 +30,9 @@ public class InformationController {
 	@ResponseBody
 	public Integer addWomanInformation(@RequestParam Map<String,Object> map){
 		int num = 0;
-		//如果有avatar上传头像 TODO 
+		//如果有avatar上传头像 和 imgs TODO 
 		
-		//放进map.avatar
+		//放进map.avatar  和  imgs
 		
 		
 		if (map.containsKey("trueName") && map.containsKey("country")) {
