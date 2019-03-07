@@ -7,7 +7,7 @@ public class News extends BaseEntity {
 	private Integer newsId;
 	private String tittle;
 	private String content;
-	private String type;
+	private String newsType;
 	private String creatTime;
 	
 	
@@ -29,11 +29,12 @@ public class News extends BaseEntity {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getType() {
-		return type;
+	
+	public String getNewsType() {
+		return newsType;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setNewsType(String newsType) {
+		this.newsType = newsType;
 	}
 	public String getCreatTime() {
 		return creatTime;
