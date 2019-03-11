@@ -2,11 +2,94 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.marriage.message.dao.MessageDao">
+<!-- 实现数据库的数据搜索  -->
+      <sql id="findMessageinfosql">
+         m.message_id           messageId     
+         ,m.user_name           userName      
+         ,m.user_phone          userPhone     
+         ,m.user_email          userEmail      
+         ,m.user_postal_code    userPostalCode  
+         ,m.user_address        userAddress     
+         ,m.content             content        
+         ,m.del_flag            delFlag         
+      </sql>
+      <select id="findMessageList" resultType="com.marriage.message.entity.MessageEntity" parameterType="map">
+         select
+             <include refid="findMessageinfosql"></include>
+             
+             from message m 
+             where m.del_flag=0
+             
+             <if test="messageId !=null and messageId !=''">
+                and m.message_id like CONCAT('%', #{messageId}, '%')
+             </if>
+             <if test="userName !=null and userName !=''">
+                and m.user_name like CONCAT('%', #{userName}, '%')
+             </if>
+             <if test="userPhone !=null and userPhone !=''">
+                and m.user_phone like CONCAT('%', #{userPhone}, '%')
+             </if>
+             <if test="userEmail !=null and userEmail !=''">
+                and m.user_email like CONCAT('%', #{userEmail}, '%')
+             </if>
+             <if test="userPostalCode !=null and userPostalCode !=''">
+                and m.user_postal_code like CONCAT('%', #{userPostalCode}, '%')
+             </if>
+             <if test="userAddress !=null and userAddress !=''">
+                and m.user_address like CONCAT('%', #{userAddress}, '%')
+             </if>
+             <if test="content !=null and content !=''">
+                and m.content like CONCAT('%', #{content}, '%')
+             </if>
+             <if test="delFlag !=null and delFlag !=''">
+                and m.del_flag like CONCAT('%', #{delFlag}, '%')
+             </if>
 
-
-
-
-
-
+          <if test="start != null">
+    	limit #{start},#{size}
+    </if>
+      
+      </select>
+      
+      <select id="findMessageById" parameterType="map" resultType="com.marriage.message.entity.MessageEntity">
+            
+            select message_id AS messageId
+            ,user_name AS userName
+            ,user_phone AS userPhone
+            ,user_email AS userEmail
+            ,user_postal_code AS userPostalCode
+            ,user_address AS userAddress
+            ,content AS content
+             del_flag AS delFlag
+            
+            
+            from message where messageId=#{messageId}
+      
+      </select>
+      <update id="updateMessageList" parameterType ="map">
+            update  message set
+            userNme=#{userName}
+            ,userPhone=#{userPhone}
+            ,userEmail=#{userEmail}
+            ,userPostalCode=#{userPostalCode}
+            ,userAddress=#{userAddress}
+            ,content=#{content}
+            ,delFlag=#{delFlag}
+            where messageId=#{messageId};
+      
+      </update>
+      <delete id="delSingleMessage">
+            delete from message where messageId=#{messageId};
+      
+      
+      </delete>
+      <delete id="delMoreMessage">
+            delete from message 
+            where 
+            messageId=#{messageId}
+            ,userNme=#{userName}
+            ,userPhone=#{userPhone};
+      
+      </delete>
 
 </mapper>
