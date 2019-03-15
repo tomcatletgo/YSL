@@ -1,0 +1,26 @@
+package com.marriage.message.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.marriage.message.entity.MessageEntity;
+
+public interface MessageDao {
+	
+	public <T> List<T> findMessageList(Map<String,Object>Map);
+	
+	public MessageEntity findMessageById(Map<String,Object>Map);
+	
+	public int delSingleMessage(Map<String,Object>Map);
+	
+	public int delMoreMessage(Map<String,Object>Map);
+	
+	public <T> List<T> updateMessageList(Map<String,Object>Map);
+	//前台留言添加 
+	Integer addUserLiuYan(Map<String,Object>Map);
+	
+
+
+}
