@@ -44,6 +44,10 @@
 </select>
 
 
+<select id="selectNewsTopIndex" resultMap="newsBaseMap" parameterType="map">
+	SELECT   *  FROM news  WHERE	1 = 1 AND del_flag = 0  ORDER BY creat_time DESC LIMIT 3
+</select>
+
 <update id="updateNewsByNewsId" >
 	
 		update news 

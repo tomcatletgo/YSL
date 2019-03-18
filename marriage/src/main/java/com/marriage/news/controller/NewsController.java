@@ -86,6 +86,41 @@ public class NewsController {
 
 	}
 	
+	@RequestMapping(value="top")
+	@ResponseBody
+	public Map<String, Object> selectNewsTopIndex(@RequestParam Map<String,Object> map){
+
+		Map<String, Object> replyMap = new HashMap<String,Object>();
+		
+		try {
+			//接收的list
+			List<ManInformation> newsList = null;
+			newsList = newsService.selectNewsTopIndex(map);
+			
+			if(newsList.size() > 0){
+				replyMap.put("code", "200");
+				replyMap.put("state", "success");
+				replyMap.put("newsList", newsList);
+			}else{
+				replyMap.put("code", "500");
+				replyMap.put("state", "error");
+			}
+			
+		} catch (Exception e) {
+		
+			replyMap.put("code", "500");
+			replyMap.put("state", "error");
+		}
+			
+			
+		
+		
+		
+		return replyMap;
+
+	}
+	
+	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	@ResponseBody
 	public  Map<String, Object> updateNewsByNewsId(@RequestParam Map<String,Object> map){

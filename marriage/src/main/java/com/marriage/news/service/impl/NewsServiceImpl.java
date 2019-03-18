@@ -44,4 +44,10 @@ public class NewsServiceImpl implements NewsService {
 		return newsDao.updateNewsDelFlagById(map);
 	}
 
+	@Override
+	public List<ManInformation> selectNewsTopIndex(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return newsDao.selectNewsTopIndex(map);
+	}
+
 }

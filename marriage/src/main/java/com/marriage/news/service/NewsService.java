@@ -15,6 +15,8 @@ public interface NewsService {
 
 	Integer deleteNewsById(Map<String, Object> map);
 
+	List<ManInformation> selectNewsTopIndex(Map<String, Object> map);
+
 	
 
 }

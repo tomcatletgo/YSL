@@ -15,4 +15,6 @@ public interface NewsDao {
 
 	Integer updateNewsDelFlagById(Map<String, Object> map);
 
+	List<ManInformation> selectNewsTopIndex(Map<String, Object> map);
+
 }
