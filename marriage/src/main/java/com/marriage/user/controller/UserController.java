@@ -178,14 +178,16 @@ public class UserController {
 	}
 	
 	/**
-	 * auod wangdiran  前台 注册  接口
+	 * auod wangdiran  前台 注册  接口     图片测试没有测试     其余都已测试
 	 * **/
 	@RequestMapping(value="/useradds",method=RequestMethod.POST)//TODO  post
 	@ResponseBody
 	public Map<String, Object>  userAdds(@RequestParam Map<String,Object> map,HttpServletRequest request){
-	    int  user = 0;
+	    int  user = 0 ;
+	    int  man = 0 ;
 		Map<String, Object> replyMap = new HashMap<String,Object>();
-		if (map.containsKey("true_name") && map.containsKey("karigana")&&
+		if (    map.containsKey("userName") && map.containsKey("password")&&
+				map.containsKey("true_name") && map.containsKey("karigana")&&
 				map.containsKey("romaji") && map.containsKey("postal_code")&&
 				map.containsKey("prefectures") && map.containsKey("municipal_ward")&&
 				map.containsKey("street_bunch") && map.containsKey("building_name")&&
@@ -206,11 +208,23 @@ public class UserController {
 				&& map.containsKey("divorce_reason")&&map.containsKey("message") 
 				&& map.containsKey("remark")
 				) {
-			
-				user = userService.userAdds(map);
+				
 				
 		}
-		if(user > 0){
+		//添加到user表里   默认状态为 未激活   ---- star
+		user = userService.userAddsUser(map);
+		//-----------End
+		
+		//根据用用户名，密码来查询userid    ---star
+	    User  us = new User();
+		us = userService.userUserId(map);
+		System.out.println("user_id======="+us.getUser_id());
+		map.put("userId",us.getUser_id());
+		//-----------End
+		
+		//添加到man_information表中
+		man = userService.userAdds(map);
+		if(user > 0 && man >0){
 			replyMap.put("code", "200");
 			replyMap.put("state", "success");
 		}else{

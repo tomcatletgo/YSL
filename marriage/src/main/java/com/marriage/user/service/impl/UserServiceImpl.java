@@ -219,8 +219,27 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public int userAdds(Map<String, Object> map) {
-		int user = userDao.userAdds(map);
+	public Integer userAdds(Map<String, Object> map) {
+		Integer user = userDao.userAdds(map);
+		return user;
+	}
+
+
+
+
+	@Override
+	public Integer userAddsUser(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		Integer user = userDao.userAddsUser(map);
+		return user;
+	}
+
+
+
+
+	@Override
+	public User userUserId(Map<String, Object> map) {
+		User user = userDao.userUserId(map); 
 		return user;
 	}
 }

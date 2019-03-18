@@ -20,6 +20,11 @@ public interface UserService {
 
 	List<User> userLogin(Map<String, Object> map);
 
-	int userAdds(Map<String, Object> map);
+	Integer userAdds(Map<String, Object> map);
+	
+	Integer userAddsUser(Map<String, Object> map);
+
+	User userUserId(Map<String, Object> map);
+
 
 }

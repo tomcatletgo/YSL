@@ -23,5 +23,10 @@ public interface UserDao {
 	List<User> userLogin(Map<String, Object> map);
 
 	Integer userAdds(Map<String, Object> map);
+	//添加到user表
+	Integer userAddsUser(Map<String, Object> map);
+
+	User userUserId(Map<String, Object> map);
+
 
 }

@@ -263,15 +263,30 @@
        AND user_character = '1'  AND  activation = '1' AND  del_flag = '0'
 </select>
 
+<select id="userUserId" parameterType="map" resultType="com.marriage.user.entity.User">
+	 SELECT user_id,user_name AS userName FROM  USER 
+    WHERE  1=1 AND  user_name = #{userName}  AND password= #{password}   
+       AND user_character = '1'  AND  activation = '0' AND  del_flag = '0'
+</select>
+
 <insert id="userAdds" parameterType="map">
 	insert into man_information 
-	(true_name,karigana,romaji,postal_code,prefectures,municipal_ward,street_bunch,building_name,
+	(user_id,true_name,karigana,romaji,postal_code,prefectures,municipal_ward,street_bunch,building_name,
 	ancestral_home,phone,mobile_phone,email,other_email,line_id,date_of_birth,age,hobby,qualification,
 	smoking,sake,height,weight,blood_group,education,occupation,annual_income,assets,holiday,residence_form,
 	home_rowing,family_members,marriage_history,living_together,remarriage_num,remarriage_situation,divorce_reason,message,remark)
-	values("text","123eee","132","132",1,"132","132","132",1,"132","132","132","132","132","2019-3-15",
-		1,"132","132",1,1,"132","132","132","132","132","132","132",1,1,1,"132",1,"132",1,1,"132","132","132"
+	values(
+	#{userId},#{trueName},#{karigana},#{romaji},#{postalCode},#{prefectures},#{municipalWard},#{streetBunch},#{buildingName}
+	,#{ancestralHome},#{phone},#{mobilePhone},#{email},#{otherEmail},#{lineId},#{dateOfBirth},#{age},#{hobby},#{qualification}
+	,#{smoking},#{sake},#{height},#{weight},#{bloodGroup},#{education},#{occupation},#{annualIncome},#{assets},#{holiday},#{residenceForm}
+	,#{homeRowing},#{familyMembers},#{marriageHistory},#{livingTogether},#{remarriageNum},#{remarriageSituation},#{divorceReason},#{message},#{remark}
 	)
+</insert>
+
+<insert id="userAddsUser" parameterType="map">
+	
+	INSERT INTO USER (user_name,`password`,user_character)
+ 	VALUES( #{userName} ,#{password},1)
 </insert>
 
 
