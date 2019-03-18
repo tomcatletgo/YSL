@@ -209,8 +209,8 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public User userLogin(Map<String, Object> map) {
-		User user = userDao.userLogin(map); 
+	public List<User> userLogin(Map<String, Object> map) {
+		List<User> user = userDao.userLogin(map); 
 
 		return user;
 	}

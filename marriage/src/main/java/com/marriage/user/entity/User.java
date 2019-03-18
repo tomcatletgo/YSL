@@ -7,6 +7,7 @@ public class User extends BaseEntity{
 	/**
 	 * 账号
 	 */
+	private Integer user_id;
 	private String userName;
 	private String password;
 	/**
@@ -25,6 +26,12 @@ public class User extends BaseEntity{
 	
 	
 	
+	public Integer getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
+	}
 	public ManInformation getManInformation() {
 		return manInformation;
 	}

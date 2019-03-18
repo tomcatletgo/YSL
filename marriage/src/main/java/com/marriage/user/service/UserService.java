@@ -18,7 +18,7 @@ public interface UserService {
 
 	Integer checkUserNameIsUsedOrNot(String userName);
 
-	User userLogin(Map<String, Object> map);
+	List<User> userLogin(Map<String, Object> map);
 
 	int userAdds(Map<String, Object> map);
 

@@ -258,11 +258,9 @@
 </select>
 
 <select id="userLogin" parameterType="map" resultType="com.marriage.user.entity.User">
-
-	SELECT * FROM  USER 
-	 WHERE user_name = #{userName} 
-	 AND password= #{password} 
-	 AND  del_flag = '0'
+	 SELECT user_id,user_name AS userName FROM  USER 
+    WHERE  1=1 AND  user_name = #{userName}  AND password= #{password}   
+       AND user_character = '1'  AND  activation = '1' AND  del_flag = '0'
 </select>
 
 <insert id="userAdds" parameterType="map">

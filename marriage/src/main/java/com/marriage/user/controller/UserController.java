@@ -1,11 +1,14 @@
 package com.marriage.user.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.Session;
 
+import org.apache.ibatis.javassist.compiler.ast.NewExpr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.object.UpdatableSqlQuery;
 import org.springframework.stereotype.Controller;
@@ -150,19 +153,23 @@ public class UserController {
 	}
 	
 	/**
-	 * auod wangdiran  前台 登录  接口
+	 * auod wangdiran  前台 登录  接口     本人已测试    发送参数正常   
+	 * 
+	 * userName  password    所需参数
+	 * 
 	 * **/
 	@RequestMapping(value="/userLogin",method=RequestMethod.POST)//TODO  post
 	@ResponseBody
 	public Map<String, Object>  userLogin(@RequestParam Map<String,Object> map,HttpServletRequest request){
-	    User  user = new User();
+	    List<User>  user = new ArrayList<>();
 		Map<String, Object> replyMap = new HashMap<String,Object>();
 		if (map.containsKey("userName") && map.containsKey("password")) {
 			user = userService.userLogin(map);
 		}
-		if(replyMap != null){
+		if(user.size() > 0 ){
 			replyMap.put("code", "200");
 			replyMap.put("state", "success");
+			replyMap.put("userinfo", user);
 		}else{
 			replyMap.put("code", "500");
 			replyMap.put("state", "error");

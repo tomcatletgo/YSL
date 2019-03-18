@@ -20,7 +20,7 @@ public interface UserDao {
 
 	List<User> selectUserByUserName(String userName);
 
-	User userLogin(Map<String, Object> map);
+	List<User> userLogin(Map<String, Object> map);
 
 	Integer userAdds(Map<String, Object> map);
 
