@@ -1,5 +1,7 @@
 package com.marriage.news.controller;
 
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,6 +77,31 @@ public class NewsController {
 			newsList = newsService.selectNewsBypage(map);
 			//放进map去
 			replyMap.put("newsList", newsList);
+			
+		} else {
+			replyMap.put("message", "page error");
+		}
+		
+		
+		
+		return replyMap;
+
+	}
+	
+	@RequestMapping(value="selectInfo",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> selectNewsById(@RequestParam Map<String,Object> map){
+
+		Map<String, Object> replyMap = new HashMap<String,Object>();
+		
+		//获取新闻详细数据
+		if(map.get("newsId") != null){
+			
+			//接收的list
+			List<ManInformation> newsinfo = null;
+			newsinfo = newsService.selectNewsById(map);
+			//放进map去
+			replyMap.put("newsinfo", newsinfo);
 			
 		} else {
 			replyMap.put("message", "page error");

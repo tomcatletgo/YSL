@@ -50,4 +50,9 @@ public class NewsServiceImpl implements NewsService {
 		return newsDao.selectNewsTopIndex(map);
 	}
 
+	@Override
+	public List<ManInformation> selectNewsById(Map<String, Object> map) {
+		return newsDao.selectNewsById(map);
+	}
+
 }

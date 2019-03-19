@@ -17,6 +17,8 @@ public interface NewsService {
 
 	List<ManInformation> selectNewsTopIndex(Map<String, Object> map);
 
+	List<ManInformation> selectNewsById(Map<String, Object> map);
+
 	
 
 }
