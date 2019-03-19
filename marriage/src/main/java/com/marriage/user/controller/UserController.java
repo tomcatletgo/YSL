@@ -157,6 +157,8 @@ public class UserController {
 	 * 
 	 * userName  password    所需参数
 	 * 
+	 *  用户状态必须是已激活状态才能够登录，不然返回值都是500
+	 * 
 	 * **/
 	@RequestMapping(value="/userLogin",method=RequestMethod.POST)//TODO  post
 	@ResponseBody
