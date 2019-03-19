@@ -140,7 +140,7 @@ public class MessageController {
 	public Map<String, Object> addUserLiuYan(@RequestParam Map<String,Object> map,HttpServletRequest request){
 		int num = 0;
 		Map<String, Object> replyMap = new HashMap<String,Object>();
-		if (map.containsKey("userName") && map.containsKey("userPhone") &&
+		if (map.containsKey("userName") && map.containsKey("userPhone") && map.containsKey("surname") &&
 			map.containsKey("userEmail") && map.containsKey("userPostalCode") && 
 			map.containsKey("userAddress") && map.containsKey("content") ) {
 			num = messageService.addUserLiuYan(map);

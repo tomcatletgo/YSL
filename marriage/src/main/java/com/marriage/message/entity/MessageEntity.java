@@ -7,6 +7,7 @@ public class MessageEntity extends BaseEntity{
     private Integer messageId;
     private String userName;
     private String userPhone;
+    private String  surname;
     private String userEmail;
     private String userPostalCode;
     private String userAddress;
@@ -31,6 +32,13 @@ public class MessageEntity extends BaseEntity{
 	}
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
+	}
+	
+	public String getSurname() {
+		return surname;
+	}
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 	public String getUserEmail() {
 		return userEmail;

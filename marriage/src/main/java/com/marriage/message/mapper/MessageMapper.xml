@@ -85,8 +85,8 @@
       
       <insert id="addUserLiuYan"  parameterType="map">
       INSERT INTO message 
-(user_name,user_phone,user_email,user_postal_code,user_address,content)
-VALUES(#{userName},#{userPhone},#{userEmail},#{userPostalCode},#{userAddress},#{content})
+(user_name,user_phone,surname,user_email,user_postal_code,user_address,content)
+VALUES(#{userName},#{userPhone},#{surname},#{userEmail},#{userPostalCode},#{userAddress},#{content})
       </insert>
       
       
