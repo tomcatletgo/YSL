@@ -216,14 +216,14 @@ public class UserController {
 				
 		}
 		//添加到user表里   默认状态为 未激活   ---- star
-		//user = userService.userAddsUser(map);
+		user = userService.userAddsUser(map);
 		//-----------End
 		
 		//根据用用户名，密码来查询userid    ---star
 	    User  us = new User();
-		//us = userService.userUserId(map);
+		us = userService.userUserId(map);
 		System.out.println("user_id======="+us.getUser_id());
-		//map.put("userId",us.getUser_id());
+		map.put("userId",us.getUser_id());
 		//-----------End
 		
 		//添加到man_information表中
