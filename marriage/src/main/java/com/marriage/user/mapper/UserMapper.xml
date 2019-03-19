@@ -67,6 +67,7 @@
 	<result column="divorce_reason" property="divorceReason"/>
 	<result column="message" property="message"/>
 	<result column="remark" property="remark"/>
+	<result column="xzphotourl" property="xzphotourl" jdbcType="BLOB"/> 
 	<association property="user" javaType="com.marriage.user.entity.User">
 		<result column="user_id" property="rowId"/>
 		<result column="user_name" property="userName"/>
@@ -274,12 +275,12 @@
 	(user_id,true_name,karigana,romaji,postal_code,prefectures,municipal_ward,street_bunch,building_name,
 	ancestral_home,phone,mobile_phone,email,other_email,line_id,date_of_birth,age,hobby,qualification,
 	smoking,sake,height,weight,blood_group,education,occupation,annual_income,assets,holiday,residence_form,
-	home_rowing,family_members,marriage_history,living_together,remarriage_num,remarriage_situation,divorce_reason,message,remark)
+	home_rowing,family_members,marriage_history,living_together,remarriage_num,remarriage_situation,divorce_reason,message,remark,xzphotourl)
 	values(
 	#{userId},#{trueName},#{karigana},#{romaji},#{postalCode},#{prefectures},#{municipalWard},#{streetBunch},#{buildingName}
 	,#{ancestralHome},#{phone},#{mobilePhone},#{email},#{otherEmail},#{lineId},#{dateOfBirth},#{age},#{hobby},#{qualification}
 	,#{smoking},#{sake},#{height},#{weight},#{bloodGroup},#{education},#{occupation},#{annualIncome},#{assets},#{holiday},#{residenceForm}
-	,#{homeRowing},#{familyMembers},#{marriageHistory},#{livingTogether},#{remarriageNum},#{remarriageSituation},#{divorceReason},#{message},#{remark}
+	,#{homeRowing},#{familyMembers},#{marriageHistory},#{livingTogether},#{remarriageNum},#{remarriageSituation},#{divorceReason},#{message},#{remark},#{xzphotourl}
 	)
 </insert>
 

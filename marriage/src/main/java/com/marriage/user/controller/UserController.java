@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.druid.sql.visitor.functions.If;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import com.marriage.uitl.PhotoUtil;
 import com.marriage.user.entity.ManInformation;
 import com.marriage.user.entity.User;
 import com.marriage.user.service.UserService;
@@ -200,28 +202,28 @@ public class UserController {
 				map.containsKey("hobby") && map.containsKey("qualification")&&
 				map.containsKey("smoking") && map.containsKey("sake")&&
 				map.containsKey("height") && map.containsKey("weight") && 
-				map.containsKey("blood_group")&&map.containsKey("education") 
-				&& map.containsKey("blood_group")&&map.containsKey("occupation") 
-				&& map.containsKey("annual_income")&&map.containsKey("assets") 
-				&& map.containsKey("holiday")&&map.containsKey("residence_form") 
-				&& map.containsKey("home_rowing")&&map.containsKey("family_members") 
-				&& map.containsKey("marriage_history")&&map.containsKey("living_together") 
-				&& map.containsKey("remarriage_num")&&map.containsKey("remarriage_situation") 
-				&& map.containsKey("divorce_reason")&&map.containsKey("message") 
-				&& map.containsKey("remark")
+				map.containsKey("blood_group")&&map.containsKey("education")&& 
+				map.containsKey("blood_group")&&map.containsKey("occupation")&& 
+				map.containsKey("annual_income")&&map.containsKey("assets")&& 
+				map.containsKey("holiday")&&map.containsKey("residence_form") && 
+				map.containsKey("home_rowing")&&map.containsKey("family_members")&& 
+				map.containsKey("marriage_history")&&map.containsKey("living_together")&& 
+				map.containsKey("remarriage_num")&&map.containsKey("remarriage_situation")&& 
+			    map.containsKey("divorce_reason")&&map.containsKey("message")&& 
+				map.containsKey("remark")&&map.containsKey("xzphotourl")
 				) {
 				
 				
 		}
 		//添加到user表里   默认状态为 未激活   ---- star
-		user = userService.userAddsUser(map);
+		//user = userService.userAddsUser(map);
 		//-----------End
 		
 		//根据用用户名，密码来查询userid    ---star
 	    User  us = new User();
-		us = userService.userUserId(map);
+		//us = userService.userUserId(map);
 		System.out.println("user_id======="+us.getUser_id());
-		map.put("userId",us.getUser_id());
+		//map.put("userId",us.getUser_id());
 		//-----------End
 		
 		//添加到man_information表中
@@ -236,8 +238,24 @@ public class UserController {
 		return replyMap;
 	}
 	
-	
-	
+	//图片上传   非base64加密模式上传图片
+	@RequestMapping(value = "upload",method = RequestMethod.POST)
+	@ResponseBody
+    public Map<String, Object> upload(
+     @RequestParam("file") MultipartFile file , HttpServletRequest request){
+		 Map<String, Object> replyMap = new HashMap<String,Object>();
+       try {
+           request.setAttribute("img",PhotoUtil.saveFile(file,request));
+          replyMap.put("url",PhotoUtil.saveFile(file,request));
+          replyMap.put("code", "200");
+          replyMap.put("state", "success");
+		} catch (Exception e) {
+			replyMap.put("code", "500");
+			replyMap.put("state", "error");
+		}
+		return replyMap;
+		
+    }
 	
 	
 }

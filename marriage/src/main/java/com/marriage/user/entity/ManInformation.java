@@ -123,8 +123,10 @@ public class ManInformation extends BaseEntity{
 	 * 備考
 	 */
 	private String remark;
-	
-	
+	/*
+	 * 写真
+	 * */
+	private Object xzphotourl;
 	
 	
 	
@@ -375,6 +377,12 @@ public class ManInformation extends BaseEntity{
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public Object getXzphotourl() {
+		return xzphotourl;
+	}
+	public void setXzphotourl(Object xzphotourl) {
+		this.xzphotourl = xzphotourl;
 	}
 	
 	
