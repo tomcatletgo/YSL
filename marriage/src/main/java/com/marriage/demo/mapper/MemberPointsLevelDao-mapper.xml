@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.marriage.demo.dao.MemberPointsLevelDao">
 
-<resultMap type="com.marriage.demo.entity.MemberPointsLevelEntity" id="levelListBase">
+<!-- <resultMap type="com.marriage.demo.entity.MemberPointsLevelEntity" id="levelListBase">
 	<id column="member_level_id" property="rowId" />
 	<result column="member_level_name" property="memberLevelName"/>
 	<result column="member_points_bottom" property="memberPointsBottom"/>
@@ -30,7 +30,7 @@
     order by member_points_bottom
 
 </select>
-
+ -->
 
 
 </mapper>

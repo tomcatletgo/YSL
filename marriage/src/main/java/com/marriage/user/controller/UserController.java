@@ -186,7 +186,7 @@ public class UserController {
 	 * **/
 	@RequestMapping(value="/useradds",method=RequestMethod.POST)//TODO  post
 	@ResponseBody
-	public Map<String, Object>  userAdds(@RequestParam Map<String,Object> map,HttpServletRequest request){
+	public Map<String, Object>  userAdds(@RequestParam("xzphotourl") MultipartFile file,@RequestParam Map<String,Object> map,HttpServletRequest request){
 	    int  user = 0 ;
 	    int  man = 0 ;
 		Map<String, Object> replyMap = new HashMap<String,Object>();
@@ -227,7 +227,11 @@ public class UserController {
 		//-----------End
 		
 		//添加到man_information表中
+		System.err.println("xzphotourl==="+map.get("xzphotourl"));
+		replyMap.put("xzphotourl",PhotoUtil.saveFile(file,request));
+		System.err.println("xzphotourl======="+replyMap.get("xzphotourl"));
 		man = userService.userAdds(map);
+		
 		if(user > 0 && man >0){
 			replyMap.put("code", "200");
 			replyMap.put("state", "success");
@@ -237,6 +241,8 @@ public class UserController {
 		}
 		return replyMap;
 	}
+	
+	
 	
 	//图片上传   非base64加密模式上传图片
 	@RequestMapping(value = "upload",method = RequestMethod.POST)
