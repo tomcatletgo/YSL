@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marriage.news.dao.NewsDao">
+
+<insert id="insertNews">
+
+	insert into	news
+	(
+		tittle
+		,content
+		,news_type
+		,creat_time
+	)
+	values(#{tittle},#{content},#{newsType},now())
+
+</insert>
+
+<resultMap type="com.marriage.news.entity.News" id="newsBaseMap">
+
+	<result column="news_id" property="newsId"/>
+	<result column="news_id" property="rowId"/>
+	<result column="tittle" property="tittle"/>
+	<result column="content" property="content"/>
+	<result column="news_type" property="newsType"/>
+	<result column="creat_time" property="creatTime"/>
+	<result column="del_flag" property="delFlag" />
+</resultMap>
+<select id="selectNewsByPage" resultMap="newsBaseMap" parameterType="map">
+	select *
+	
+	from news
+	
+	where del_flag = 0
+ 	<if test="newsId != null and newsId != '' ">
+    		and news_id = #{newsId}
+    </if>
+	
+	order by creat_time desc
+	
+	<if test="start != null">
+    	limit #{start},#{size}
+    </if>
+</select>
+
+
+<update id="updateNewsByNewsId">
+	
+		update news 
+		<set>
+			<if test="tittle != null and tittle != '' ">
+		      tittle = #{tittle},
+		    </if>
+			<if test="content != null and content != '' ">
+		      content = #{content},
+		    </if>
+		    <if test="newsType != null and newsType != '' ">
+		      news_type = #{newsType},
+		    </if>
+		   
+		    
+		</set>
+		where news_id = #{newsId}
+</update>
+
+
+<update id="updateNewsDelFlagById">
+	update news 
+	
+	set del_flag = 1
+	
+	where news_id in (${ids})
+</update>
+
+
+</mapper>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marriage.information.dao.InformationDao">
+
+
+<insert id="addWomanInformation" parameterType="map" useGeneratedKeys="true" keyProperty="womanId">
+	insert into woman_information
+	(woman_id,avatar,true_name,country,address,phone,id_card,birth_date,height_and_weight
+	,identity_guarantor_true_name,identity_guarantor_phone,identity_guarantor_address,identity_guarantor_relationship_with_user
+	,marriage_history,occupation,blood_group,woman_character,move_to_japan,smoking_sake
+	,japanese_level,interest,cooking_level,family_members,hope_male_age,hope_male_height_weight
+	,hope_male_marriage_history,hope_male_child,hope_male_education_level,hope_male_annual_income
+	,hope_male_can_cohabitation,hope_male_occupation,message_to_male)
+	
+	values(#{womanId},#{avatar},#{trueName},#{country},#{address},#{phone},#{idCard},#{birthDate},#{heightAndWeight}
+	,#{identityGuarantorTrueName},#{identityGuarantorPhone},#{identityGuarantorAddress},#{identityGuarantorRelationshipWithUser}
+	,#{marriageHistory},#{occupation},#{bloodGroup},#{womanCharacter},#{movToJapan},#{smokingSake}
+	,#{japaneseLevel},#{interest},#{cookingLevel},#{familyMembers},#{hopeMaleAge},#{hopeMaleHeightWeight}
+	,#{hopeMaleMarriageHistory},#{hopeMaleChild},#{hopeMaleEducationLevel},#{hopeMaleAnnualIncome}
+	,#{hopeMaleCanCohabitation},#{hopeMaleOccupation},#{messageToMale})
+</insert>
+
+
+<resultMap type="com.marriage.information.entity.WomanInformation" id="womanResultMap">
+	
+	<result column="woman_id" property="womanId"/>
+	<result column="woman_id" property="rowId"/>
+	<result column="avatar" property="avatar"/>
+	<result column="true_name" property="trueName"/>
+	<result column="country" property="country"/>
+	<result column="address" property="address"/>
+	<result column="phone" property="phone"/>
+	<result column="id_card" property="idCard"/>
+	<result column="birth_date" property="birthDate"/>
+	<result column="height_and_weight" property="heightAndWeight"/>	
+	<result column="identity_guarantor_true_name" property="identityGuarantorTrueName"/>
+	<result column="identity_guarantor_phone" property="identityGuarantorPhone"/>
+	<result column="identity_guarantor_address" property="identityGuarantorAddress"/>
+	<result column="identity_guarantor_relationship_with_user" property="identityGuarantorRelationshipWithUser"/>
+	<result column="marriage_history" property="marriageHistory"/>
+	<result column="occupation" property="occupation"/>
+	<result column="blood_group" property="bloodGroup"/>
+	<result column="woman_character" property="womanCharacter"/>
+	<result column="move_to_japan" property="movToJapan"/>
+	<result column="smoking_sake" property="smokingSake"/>
+	<result column="japanese_level" property="japaneseLevel"/>
+	<result column="interest" property="interest"/>
+	<result column="cooking_level" property="cookingLevel"/>
+	<result column="family_members" property="familyMembers"/>
+	<result column="hope_male_age" property="hopeMaleAge"/>
+	<result column="hope_male_height_weight" property="hopeMaleHeightWeight"/>
+	<result column="hope_male_marriage_history" property="hopeMaleMarriageHistory"/>
+	<result column="hope_male_child" property="hopeMaleChild"/>
+	<result column="hope_male_education_level" property="hopeMaleEducationLevel"/>
+	<result column="hope_male_annual_income" property="hopeMaleAnnualIncome"/>
+	<result column="hope_male_can_cohabitation" property="hopeMaleMarriageHistory"/>
+	<result column="hope_male_occupation" property="hopeMaleOccupation"/>
+	<result column="message_to_male" property="messageToMale"/>
+	<result column="del_flag" property="delFlag" />
+	<collection column="woman_id" property="imgs" select="selectImgsById"></collection>
+</resultMap>
+<select id="selectImgsById" resultType="com.marriage.img.entity.ImgEntity">
+	select  img_id AS imgId
+		    ,img_id AS rowId
+			,woman_id AS womanId
+			,img_url AS imgUrl
+			,del_flag AS delFlag
+	
+	from img 
+	where woman_id = #{woman_id}
+</select>
+
+<select id="selectWomanInformationBypage" resultMap="womanResultMap" parameterType="map">
+
+	select woman_id,avatar,true_name,country,address,phone,id_card,birth_date,height_and_weight
+	,identity_guarantor_true_name,identity_guarantor_phone,identity_guarantor_address,identity_guarantor_relationship_with_user
+	,marriage_history,occupation,blood_group,woman_character,move_to_japan,smoking_sake
+	,japanese_level,interest,cooking_level,family_members,hope_male_age,hope_male_height_weight
+	,hope_male_marriage_history,hope_male_child,hope_male_education_level,hope_male_annual_income
+	,hope_male_can_cohabitation,hope_male_occupation,message_to_male,del_flag
+	
+	from woman_information
+	
+	where del_flag = 0
+	 <!-- <if test="#{maxPoint} != null">
+    		and m.member_points_top  &lt; #{maxPoint}
+    	</if> -->
+	
+	order by woman_id desc
+	
+	<if test="start != null">
+    	limit #{start},#{size}
+    </if>
+	
+</select>
+
+
+<update id="updateWomanInformationByWomanId">
+	update woman_information
+	<set>
+	<if test="trueName != null and trueName != '' ">
+      true_name = #{trueName},
+    </if>
+	<if test="avatar != null and avatar != '' ">
+      avatar = #{avatar},
+    </if>
+	<if test="country != null and country != '' ">
+      country = #{country},
+    </if>
+	<if test="address != null and address != '' ">
+      address = #{address},
+    </if>
+	<if test="phone != null and phone != '' ">
+      phone = #{phone},
+    </if>
+	<if test="idCard != null and idCard != '' ">
+      id_card = #{idCard},
+    </if>
+	<if test="birthDate != null and birthDate != '' ">
+      birth_date = #{birthDate},
+    </if>
+	<if test="heightAndWeight != null and heightAndWeight != '' ">
+      height_and_weight = #{heightAndWeight},
+    </if>
+	<if test="identityGuarantorTrueName != null and identityGuarantorTrueName != '' ">
+      identity_guarantor_true_name = #{identityGuarantorTrueName},
+    </if>
+	<if test="identityGuarantorPhone != null and identityGuarantorPhone != '' ">
+      identity_guarantor_phone = #{identityGuarantorPhone},
+    </if>
+	<if test="identityGuarantorAddress != null and identityGuarantorAddress != '' ">
+      identity_guarantor_address = #{identityGuarantorAddress},
+    </if>
+	<if test="identityGuarantorRelationshipWithUser != null and identityGuarantorRelationshipWithUser != '' ">
+      identity_guarantor_relationship_with_user = #{identityGuarantorRelationshipWithUser},
+    </if>
+	<if test="marriageHistory != null and marriageHistory != '' ">
+      marriage_history = #{marriageHistory},
+    </if>
+	<if test="occupation != null and occupation != '' ">
+      occupation = #{occupation},
+    </if>
+	<if test="bloodGroup != null and bloodGroup != '' ">
+      blood_group = #{bloodGroup},
+    </if>
+	<if test="womanCharacter != null and womanCharacter != '' ">
+      woman_character = #{womanCharacter},
+    </if>
+	<if test="moveToJapan != null and moveToJapan != '' ">
+      move_to_japan = #{moveToJapan},
+    </if>
+	<if test="smokingSake != null and smokingSake != '' ">
+      smoking_sake = #{smokingSake},
+    </if>
+	<if test="japaneseLevel != null and japaneseLevel != '' ">
+      japanese_level = #{japaneseLevel},
+    </if>
+	<if test="interest != null and interest != '' ">
+      interest = #{interest},
+    </if>
+	<if test="cookingLevel != null and cookingLevel != '' ">
+      cooking_level = #{cookingLevel},
+    </if>
+	<if test="familyMembers != null and familyMembers != '' ">
+      family_members = #{familyMembers},
+    </if>
+	<if test="hopeMaleAge != null and hopeMaleAge != '' ">
+      hope_male_age = #{hopeMaleAge},
+    </if>
+	<if test="hopeMaleHeightWeight != null and hopeMaleHeightWeight != '' ">
+      hope_male_height_weight = #{hopeMaleHeightWeight},
+    </if>
+	<if test="hopeMaleMarriageHistory != null and hopeMaleMarriageHistory != '' ">
+      hope_male_marriage_history = #{hopeMaleMarriageHistory},
+    </if>
+	<if test="hopeMaleChild != null and hopeMaleChild != '' ">
+      hope_male_child = #{hopeMaleChild},
+    </if>
+	<if test="hopeMaleEducationLevel != null and hopeMaleEducationLevel != '' ">
+      hope_male_education_level = #{hopeMaleEducationLevel},
+    </if>
+	<if test="hopeMaleAnnualIncome != null and hopeMaleAnnualIncome != '' ">
+      hope_male_annual_income = #{hopeMaleAnnualIncome},
+    </if>
+	<if test="hopeMaleCanCohabitation != null and hopeMaleCanCohabitation != '' ">
+      hope_male_can_cohabitation = #{hopeMaleCanCohabitation},
+    </if>
+	<if test="hopeMaleOccupation != null and hopeMaleOccupation != '' ">
+      hope_male_occupation = #{hopeMaleOccupation},
+    </if>
+	<if test="messageToMale != null and messageToMale != '' ">
+      message_to_male = #{messageToMale},
+    </if>
+	</set>
+	
+	where woman_id = #{womanId}
+</update>
+
+
+<update id="updateWomanDelFlagByIds">
+
+	update woman_information
+	set del_flag = 1
+	where woman_id in (${ids})
+	
+</update>
+</mapper>

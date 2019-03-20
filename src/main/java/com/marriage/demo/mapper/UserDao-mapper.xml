@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marriage.demo.dao.UserDaoDemo">
+
+<resultMap type="com.marriage.demo.entity.UserEntity" id="UserListBase">
+	<id column="userId" property="rowId" />
+	<result column="userId" property="userId"/>
+	<result column="userName" property="userName"/>
+	<result column="userPassword" property="userPassword"/>
+	<result column="userEmail" property="userEmail"/>
+	<result column="userPhone" property="userPhone"/>
+	<result column="createTime" property="createTime"/>
+	<result column="createUserId" property="createUserId"/>
+	<result column="updateTime" property="updateTime"/>
+	<result column="updateUserId" property="updateUserId"/>
+	<result column="memberTime" property="memberTime"/>
+	<result column="memberName" property="memberName"/>
+	<result column="memberPoints" property="memberPoints"/>
+	<result column="memberRegistrationDate" property="memberRegistrationDate"/>
+	<association property="memberPointsLevelEntity" column="memberPoints" javaType="com.marriage.demo.entity.MemberPointsLevelEntity" select="findLevelByPoint"></association>
+</resultMap>
+<select id="findLevelByPoint" parameterType="int" resultMap="memberLevelInUser">
+	select 	member_level_id,
+			member_level_name,
+			member_points_bottom,
+			member_points_top,
+			member_discount,
+			is_special,
+			is_show_price
+			
+	from member_points_level
+	
+	where 	#{memberPoints} >= member_points_bottom 
+			and #{memberPoints} &lt; member_points_top
+</select>
+<resultMap type="com.marriage.demo.entity.MemberPointsLevelEntity" id="memberLevelInUser">
+	<id column="member_level_id" property="rowId"/>
+	<result column="member_level_name" property="memberLevelName"/>
+	<result column="member_points_bottom" property="memberPointsBottom"/>
+	<result column="member_points_top" property="memberPointsTop"/>
+	<result column="member_discount" property="memberDiscount"/>
+	<result column="is_special" property="isSpecial"/>
+	<result column="is_show_price" property="isShowPrice"/>
+</resultMap>
+
+
+<select id="selectAllUser"  resultMap="UserListBase" parameterType="map" >
+
+    select u.user_id as userId,
+    	   u.user_name as userName,
+    	   u.user_password as userPassword,
+    	   u.user_email as userEmail,
+    	   u.user_phone as userPhone,
+    	   u.create_time as createTime,
+    	   u.create_user_id as createUserId,
+    	   u.update_time as updateTime,
+    	   u.update_user_id as updateUserId,
+    	   m.member_time as memberTime,
+    	   m.member_name as memberName,
+    	   m.member_points as memberPoints,
+    	   m.member_registration_date as memberRegistrationDate
+    	   
+    	    
+    from user as u,member as m
+    <where>
+    	u.user_id = m.user_id
+    	and u.del_flag = 0
+    	<!-- <if test="#{maxPoint} != null">
+    		and m.member_points_top  &lt; #{maxPoint}
+    	</if> -->
+    </where> 
+    
+    order by u.user_id
+    
+    <if test="start != null">
+    	limit #{start},#{size}
+    </if>
+    
+
+</select>
+
+
+
+</mapper>
